@@ -32,6 +32,7 @@ public class SignupActivity extends Activity{
         String method = "register";
         BackgroundTask backgroundTask = new BackgroundTask(this);
         backgroundTask.execute(method, fname, lname, email, password);
+        finish();
     }
 
 

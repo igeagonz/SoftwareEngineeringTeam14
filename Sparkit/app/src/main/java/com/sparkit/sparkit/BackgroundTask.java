@@ -32,8 +32,8 @@ public class BackgroundTask extends AsyncTask<String, Void, String> {
 
     @Override
     protected String doInBackground(String... params){
-        String reg_url = "http://10.0.2.2/SParkit/register.php";
-        String login_url = "http://10.0.2.2/SParkit/login.php";
+        String reg_url = "http://127.0.0.1/SParkit/register.php";
+        String login_url = "http://127.0.0.1/SParkit/login.php";
         String method  = params[0];
 
         if(method.equals("register")){
@@ -45,9 +45,9 @@ public class BackgroundTask extends AsyncTask<String, Void, String> {
             try {
                 URL url = new URL(reg_url);
                 HttpURLConnection httpURLConnection = (HttpURLConnection)url.openConnection();
-                HttpURLConnection.setRequestMethod("POST");
-                HttpURLConnection.setDoOutput(true);
-                OutputStream OS = HttpURLConnection.getOutputStream();
+                httpURLConnection.setRequestMethod("POST");
+                httpURLConnection.setDoOutput(true);
+                OutputStream OS = httpURLConnection.getOutputStream();
                 BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(OS,"UTF-8"));
 
                 String data = URLEncoder.encode("fname", "UTF-8") + "=" + URLEncoder.encode(fname, "UTF-8") + "&" +
@@ -74,7 +74,7 @@ public class BackgroundTask extends AsyncTask<String, Void, String> {
 
         }
 
-        return Null;
+        return null;
     }
 
     protected void onProgressUpdate(Void... values){
@@ -82,7 +82,7 @@ public class BackgroundTask extends AsyncTask<String, Void, String> {
     }
 
     protected void onPostExecute(String result){
-        Toast.makeTest(ctx,result, Toast.LENGTH_LONG).show();
+        Toast.makeText(ctx,result, Toast.LENGTH_LONG).show();
     }
 
 }

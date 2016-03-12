@@ -49,6 +49,7 @@ public class LoginActivity extends Activity {
     }
 
     public void userSignup(View view){
+
         startActivity(new Intent(this, SignupActivity.class));
     }
 
