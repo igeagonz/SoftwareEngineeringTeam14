@@ -83,7 +83,7 @@
                 android:textStyle="bold"
                 android:onClick="userSignup"/>
 
-        </LinearLayout>s
+        </LinearLayout>
     </ScrollView>
 
 </LinearLayout>
