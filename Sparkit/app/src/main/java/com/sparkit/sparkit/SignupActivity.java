@@ -9,7 +9,7 @@ import android.widget.*;
  * Created by nacho on 3/11/16.
  */
 
-public class SignupActivity extends Activity{
+public class   SignupActivity extends Activity{
 
     EditText ET_fname, ET_lname, ET_email, ET_password;
     String fname, lname, email, password;
@@ -17,7 +17,7 @@ public class SignupActivity extends Activity{
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+        setContentView(R.layout.activity_register);
         ET_fname = (EditText)findViewById(R.id.fname);
         ET_lname = (EditText)findViewById(R.id.lname);
         ET_email = (EditText)findViewById(R.id.new_email);

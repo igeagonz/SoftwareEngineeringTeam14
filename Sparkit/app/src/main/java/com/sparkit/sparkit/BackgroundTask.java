@@ -32,8 +32,10 @@ public class BackgroundTask extends AsyncTask<String, Void, String> {
 
     @Override
     protected String doInBackground(String... params){
-        String reg_url = "http://127.0.0.1/SParkit/register.php";
-        String login_url = "http://127.0.0.1/SParkit/login.php";
+
+        //Using local ipv4 address for testing purposes. (If running on virtual emulator, then you can use 10.0.2.2)
+        String reg_url = "http://10.101.17.97:8888/SParkit/register.php";
+        String login_url = "http://192.168.0.19:8888/SParkit/login.php";
         String method  = params[0];
 
         if(method.equals("register")){
