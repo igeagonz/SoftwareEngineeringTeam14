@@ -48,8 +48,8 @@ public class LoginActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        ET_email = (EditText)findViewById(R.id.new_email);
-        ET_password = (EditText)findViewById(R.id.new_password);
+        ET_email = (EditText)findViewById(R.id.email);
+        ET_password = (EditText)findViewById(R.id.password);
     }
 
     public void userSignup(View view){
@@ -67,7 +67,7 @@ public class LoginActivity extends Activity {
         backgroundTask.execute(method, email, password);
 
         finish();
-        //startActivity(new Intent(this, MainPage.class));
+        //startActivity(new Intent(LoginActivity.this, MainPage.class));
 
     }
 
