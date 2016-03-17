@@ -2,7 +2,7 @@
 Ignacio Gea,
 Grant Johns,
 Kenny Neckels,
-Zaid Masri,
+Zaid Masri
 
 SParkit files and documentation
 
