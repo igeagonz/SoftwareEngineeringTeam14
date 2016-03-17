@@ -54,6 +54,7 @@ public class LoginActivity extends Activity {
     }
 
     public void userLogin(View view){
+        //Logging in Logic
 
     }
 

@@ -18,6 +18,7 @@ public class   SignupActivity extends Activity{
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+
         ET_fname = (EditText)findViewById(R.id.fname);
         ET_lname = (EditText)findViewById(R.id.lname);
         ET_email = (EditText)findViewById(R.id.new_email);
