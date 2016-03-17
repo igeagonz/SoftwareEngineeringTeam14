@@ -42,10 +42,14 @@ import static android.Manifest.permission.READ_CONTACTS;
  */
 public class LoginActivity extends Activity {
 
+    EditText ET_email, ET_password;
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        ET_email = (EditText)findViewById(R.id.new_email);
+        ET_password = (EditText)findViewById(R.id.new_password);
     }
 
     public void userSignup(View view){
@@ -55,6 +59,15 @@ public class LoginActivity extends Activity {
 
     public void userLogin(View view){
         //Logging in Logic
+        String email = ET_email.getText().toString();
+        String password = ET_password.getText().toString();
+        String method = "login";
+
+        BackgroundTask backgroundTask = new BackgroundTask(this);
+        backgroundTask.execute(method, email, password);
+
+        finish();
+        //startActivity(new Intent(this, MainPage.class));
 
     }
 

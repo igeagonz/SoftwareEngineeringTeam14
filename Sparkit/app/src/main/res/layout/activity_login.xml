@@ -71,7 +71,8 @@
                 android:layout_marginTop="16dp"
                 android:text="@string/action_sign_in"
                 android:textStyle="bold"
-                android:onClick="userLogin" />
+                android:onClick="userLogin"
+                android:nestedScrollingEnabled="false" />
 
             <Button
                 android:id="@+id/signup_button"

@@ -1,12 +1,15 @@
 package com.sparkit.sparkit;
 
+import android.app.AlertDialog;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.widget.Toast;
 
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
@@ -21,13 +24,10 @@ import java.net.URLEncoder;
 public class BackgroundTask extends AsyncTask<String, Void, String> {
 
     Context ctx;
+    AlertDialog alertDialog;
     BackgroundTask(Context ctx){
         this.ctx = ctx;
 
-    }
-
-    protected void onPreExecute(){
-        super.onPreExecute();
     }
 
     @Override
@@ -61,9 +61,19 @@ public class BackgroundTask extends AsyncTask<String, Void, String> {
                 OS.close();
 
                 InputStream IS = httpURLConnection.getInputStream();
-                IS.close();
+                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(IS, "iso-8859-1"));
+                String result = "";
+                String line = "";
 
-                return "Registration Success...";
+                while((line = bufferedReader.readLine()) != null){
+                    result += line;
+                }
+
+                bufferedReader.close();
+                IS.close();
+                httpURLConnection.disconnect();
+
+                return result;
 
 
             } catch (MalformedURLException e) {
@@ -71,8 +81,46 @@ public class BackgroundTask extends AsyncTask<String, Void, String> {
             } catch (IOException e){
                 e.printStackTrace();
             }
+        }
+        else if(method.equals("login")){
+            String email = params[1];
+            String password = params[2];
+
+            try {
+                URL url = new URL(login_url);
+                HttpURLConnection httpURLConnection = (HttpURLConnection)url.openConnection();
+                httpURLConnection.setRequestMethod("POST");
+                httpURLConnection.setDoOutput(true);
+                OutputStream OS = httpURLConnection.getOutputStream();
+                BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(OS,"UTF-8"));
+
+                String data = URLEncoder.encode("email", "UTF-8") + "=" + URLEncoder.encode(email, "UTF-8") + "&" +
+                              URLEncoder.encode("password", "UTF-8") + "=" + URLEncoder.encode(password, "UTF-8");
+                bufferedWriter.write(data);
+                bufferedWriter.flush();
+                bufferedWriter.close();
+                OS.close();
+
+                InputStream IS = httpURLConnection.getInputStream();
+                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(IS, "iso-8859-1"));
+                String result = "";
+                String line = "";
+
+                while((line = bufferedReader.readLine()) != null){
+                    result += line;
+                }
+                bufferedReader.close();
+                IS.close();
+                httpURLConnection.disconnect();
+
+                return result;
 
 
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            } catch (IOException e){
+                e.printStackTrace();
+            }
         }
 
         return null;
@@ -82,8 +130,14 @@ public class BackgroundTask extends AsyncTask<String, Void, String> {
         super.onProgressUpdate(values);
     }
 
+    protected void onPreExecute(){
+        alertDialog = new AlertDialog.Builder(ctx).create();
+        alertDialog.setTitle("Login Status");
+    }
+
     protected void onPostExecute(String result){
-        Toast.makeText(ctx,result, Toast.LENGTH_LONG).show();
+        alertDialog.setMessage(result);
+        alertDialog.show();
     }
 
 }
