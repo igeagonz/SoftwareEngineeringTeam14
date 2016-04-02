@@ -67,7 +67,7 @@ public class LoginActivity extends Activity {
         backgroundTask.execute(method, email, password);
 
         finish();
-        //startActivity(new Intent(LoginActivity.this, MainPage.class));
+        startActivity(new Intent(LoginActivity.this, MainPage.class));
 
     }
 

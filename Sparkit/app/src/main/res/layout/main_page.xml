@@ -11,4 +11,12 @@
         android:text="Welcome to SParkit!"
         android:id="@+id/textView"
         android:layout_weight="0.09" />
+
+    <Button
+        android:layout_width="79dp"
+        android:layout_height="58dp"
+        android:text="Logout"
+        android:id="@+id/logout_button"
+        android:layout_gravity="center_horizontal"
+        android:onClick="onLogout" />
 </LinearLayout>
