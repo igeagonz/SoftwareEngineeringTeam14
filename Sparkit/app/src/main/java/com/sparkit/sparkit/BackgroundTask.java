@@ -136,8 +136,8 @@ public class BackgroundTask extends AsyncTask<String, Void, String> {
     }
 
     protected void onPostExecute(String result){
-        alertDialog.setMessage(result);
-        alertDialog.show();
+        Toast toast = Toast.makeText(ctx, result, Toast.LENGTH_SHORT);
+        toast.show();
     }
 
 }
