@@ -8,7 +8,7 @@ import android.widget.EditText;
  */
 
 
-//aoidjfaoisjdf
+//
 public class CreatePosting
 {
     public Post onCreatePost()
