@@ -8,7 +8,6 @@ import android.widget.EditText;
  */
 
 
-//
 public class CreatePosting
 {
     public Post onCreatePost()
@@ -30,7 +29,9 @@ public class CreatePosting
 
         Post postNew = new Post(title,email,stAddress,city,state,zip,description);
 
+        //Fix this...
         startActivity(new Intent(CreatePosting.this, MainPage.class));
+
     }
 
 }
