@@ -6,6 +6,9 @@ import android.widget.EditText;
 /**
  * Created by grantjohns on 4/1/16.
  */
+
+
+//aoidjfaoisjdf
 public class CreatePosting
 {
     public Post onCreatePost()
