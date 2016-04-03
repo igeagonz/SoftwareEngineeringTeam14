@@ -17,4 +17,15 @@
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
     </string>
+    <string name="prompt_title">Title</string>
+    <string name="prompt_LoginEmail">Log-in Email</string>
+    <string name="prompt_StAddress">Street Address</string>
+    <string name="prompt_City">City</string>
+    <string name="prompt_State">State</string>
+    <string name="prompt_ZIPcode">Zip Code</string>
+    <string name="prompt_Description">Description</string>
+    <string name="CreatePosting_button">Create Posting</string>
+    <string name="post_button">Post</string>
+    <string name="welcome_message">Welcome to SParkit!</string>
+
 </resources>

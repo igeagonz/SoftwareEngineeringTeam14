@@ -31,7 +31,20 @@
         <activity
             android:name=".MainPage"
             android:label="@string/app_name">
+            <intent-filter>
+                <action android:name="android.intent.action.com.sparkit.sparkit.MainPage" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
         </activity>
+
+        <activity
+            android:name=".CreatePosting"
+            android:label="@string/app_name">
+            <intent-filter>
+                <action android:name="android.intent.action.com.sparkit.sparkit.CreatePosting" />
+            </intent-filter>
+        </activity>
+
 
     </application>
 

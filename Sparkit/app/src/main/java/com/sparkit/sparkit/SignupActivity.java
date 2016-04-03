@@ -1,15 +1,17 @@
 package com.sparkit.sparkit;
 
 import android.app.*;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.*;
 import android.widget.*;
+
 
 /**
  * Created by nacho on 3/11/16.
  */
 
-public class   SignupActivity extends Activity{
+public class SignupActivity extends Activity{
 
     EditText ET_fname, ET_lname, ET_email, ET_password;
     String fname, lname, email, password;
@@ -31,9 +33,12 @@ public class   SignupActivity extends Activity{
         email = ET_email.getText().toString();
         password = ET_password.getText().toString();
         String method = "register";
+
         BackgroundTask backgroundTask = new BackgroundTask(this);
         backgroundTask.execute(method, fname, lname, email, password);
         finish();
+
+        startActivity(new Intent(getApplicationContext(), LoginActivity.class));
     }
 
 

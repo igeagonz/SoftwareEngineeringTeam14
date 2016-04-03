@@ -17,8 +17,11 @@ public class MainPage extends Activity {
     }
 
     public void onLogout(View view){
+        startActivity(new Intent(MainPage.this, LoginActivity.class));
+    }
 
-        startActivity(new Intent(this, LoginActivity.class));
+    public void onPost(View view){
+        startActivity(new Intent(MainPage.this, CreatePosting.class));
     }
 
 }

@@ -1,37 +1,52 @@
 package com.sparkit.sparkit;
 
-import android.content.Intent;
-import android.widget.EditText;
+import android.app.*;
+import android.os.Bundle;
+import android.view.*;
+import android.widget.*;
 
 /**
  * Created by grantjohns on 4/1/16.
  */
 
-
-public class CreatePosting
+public class CreatePosting extends Activity
 {
-    public Post onCreatePost()
-    {
-        EditText titleText = (EditText) findViewById(R.id.postTitle);
-        String title = titleText.getText().toString();
-        EditText emailText = (EditText) findViewById(R.id.postEmail);
-        String email = emailText.getText().toString();
-        EditText stAddressText = (EditText) findViewById(R.id.postStAddress);
-        String stAddress = stAddressText.getText().toString();
-        EditText cityText = (EditText) findViewById(R.id.postCity);
-        String city = cityText.getText().toString();
-        EditText stateText = (EditText) findViewById(R.id.postState);
-        String state = stateText.getText().toString();
-        EditText zipText = (EditText) findViewById(R.id.postZip);
-        int zip = Integer.parseInt(zipText.getText().toString());
-        EditText descriptionText = (EditText) findViewById(R.id.postDescription);
-        String description = descriptionText.getText().toString();
+    EditText ET_title, ET_email, ET_stAddress, ET_city, ET_state, ET_zip, ET_description;
+    String title, email,stAddress, city, state, zip, description;
 
-        Post postNew = new Post(title,email,stAddress,city,state,zip,description);
+    @Override
+    protected void onCreate(Bundle savedInstanceState){
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.create_posting);
 
-        //Fix this...
-        startActivity(new Intent(CreatePosting.this, MainPage.class));
+        ET_title = (EditText)findViewById(R.id.postTitle);
+        ET_email = (EditText)findViewById(R.id.postEmail);
+        ET_stAddress = (EditText)findViewById(R.id.postStAddress);
+        ET_city = (EditText)findViewById(R.id.postCity);
+        ET_state = (EditText)findViewById(R.id.postState);
+        ET_zip = (EditText)findViewById(R.id.postZip);
+        ET_description = (EditText)findViewById(R.id.postDescription);
 
     }
+    public void onCreatePost(View view)
+    {
+        title = ET_title.getText().toString();
+        email = ET_email.getText().toString();
+        stAddress = ET_stAddress.getText().toString();
+        city = ET_city.getText().toString();
+        state = ET_state.getText().toString();
+        zip = ET_state.getText().toString();
+        description = ET_description.getText().toString();
+
+        String method = "post";
+
+        BackgroundTask backgroundTask = new BackgroundTask(this);
+        backgroundTask.execute(method, title, email, stAddress, city, state, zip, description);
+
+        finish();
+
+    }
+
+
 
 }

@@ -1,41 +1,13 @@
 package com.sparkit.sparkit;
 
-import android.animation.Animator;
-import android.animation.AnimatorListenerAdapter;
-import android.annotation.TargetApi;
-import android.content.pm.PackageManager;
-import android.support.annotation.NonNull;
-import android.support.design.widget.Snackbar;
-import android.support.v7.app.AppCompatActivity;
-import android.app.LoaderManager.LoaderCallbacks;
-
-import android.content.CursorLoader;
-import android.content.Loader;
-import android.database.Cursor;
-import android.net.Uri;
-import android.os.AsyncTask;
-
-import android.os.Build;
 import android.os.Bundle;
-import android.provider.ContactsContract;
-import android.text.TextUtils;
-import android.view.KeyEvent;
 import android.view.View;
-import android.view.View.OnClickListener;
-import android.view.inputmethod.EditorInfo;
-import android.widget.ArrayAdapter;
-import android.widget.AutoCompleteTextView;
-import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
-
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import android.app.*;
 import android.content.*;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import static android.Manifest.permission.READ_CONTACTS;
+import android.widget.Toast;
 
 /**
  * A login screen that offers login via email/password.
@@ -54,7 +26,7 @@ public class LoginActivity extends Activity {
 
     public void userSignup(View view){
 
-        startActivity(new Intent(this, SignupActivity.class));
+        startActivity(new Intent(LoginActivity.this, SignupActivity.class));
     }
 
     public void userLogin(View view){
@@ -63,13 +35,56 @@ public class LoginActivity extends Activity {
         String password = ET_password.getText().toString();
         String method = "login";
 
-        BackgroundTask backgroundTask = new BackgroundTask(this);
-        backgroundTask.execute(method, email, password);
+        //Error checking for valid email and password
+        if(!validateEmail(email)){
+            ET_email.setError("Invalid Email");
+            ET_email.requestFocus();
+        }
+        else if (!validatePassword(password)) {
+            ET_password.setError("Password must be greater than 6 characters.");
+            ET_password.requestFocus();
+        }
+        else {
+            //Toast.makeText(LoginActivity.this, "Input Validation Success", Toast.LENGTH_LONG).show();
+            BackgroundTask backgroundTask = new BackgroundTask(this);
+            backgroundTask.execute(method, email, password);
+            startActivity(new Intent(LoginActivity.this, MainPage.class));
+            finish();
 
-        finish();
-        startActivity(new Intent(LoginActivity.this, MainPage.class));
-
+        }
     }
+
+    /*public void isValid(){
+        startActivity(new Intent(LoginActivity.this, MainPage.class));
+    }*/
+
+    //Return true if password is valid and false if password is invalid
+    protected boolean validatePassword(String password) {
+        if(password!=null && password.length()>6) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    //Return true if email is valid and false if email is invalid
+    protected boolean validateEmail(String email) {
+        String emailPattern = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
+                + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
+
+        Pattern pattern = Pattern.compile(emailPattern);
+        Matcher matcher = pattern.matcher(email);
+
+        return matcher.matches();
+    }
+
+    /*public void doConnect(){
+        startActivity(new Intent(LoginActivity.this, MainPage.class));
+    }
+
+    public void dontConnect(){
+        startActivity(new Intent(LoginActivity.this, LoginActivity.class));
+    }*/
 
 
 }

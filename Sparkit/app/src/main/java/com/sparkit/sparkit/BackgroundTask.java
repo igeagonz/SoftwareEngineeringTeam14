@@ -2,6 +2,7 @@ package com.sparkit.sparkit;
 
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.widget.Toast;
 
@@ -35,6 +36,7 @@ public class BackgroundTask extends AsyncTask<String, Void, String> {
 
         String reg_url = "http://130.184.99.197/register.php";
         String login_url = "http://130.184.99.197/login.php";
+        String post_url = "http://130.184.99.197/post.php";
         String method  = params[0];
 
         if(method.equals("register")){
@@ -109,9 +111,12 @@ public class BackgroundTask extends AsyncTask<String, Void, String> {
                 while((line = bufferedReader.readLine()) != null){
                     result += line;
                 }
+
                 bufferedReader.close();
                 IS.close();
                 httpURLConnection.disconnect();
+
+
 
                 return result;
 
@@ -123,8 +128,66 @@ public class BackgroundTask extends AsyncTask<String, Void, String> {
             }
         }
 
+        else if(method.equals("post")){
+            String title = params[1];
+            String email = params[2];
+            String stAddress = params[3];
+            String city = params[4];
+            String state = params[5];
+            String zip = params[6];
+            String description = params[7];
+
+            try {
+                URL url = new URL(post_url);
+                HttpURLConnection httpURLConnection = (HttpURLConnection)url.openConnection();
+                httpURLConnection.setRequestMethod("POST");
+                httpURLConnection.setDoOutput(true);
+                OutputStream OS = httpURLConnection.getOutputStream();
+                BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(OS,"UTF-8"));
+
+                String data = URLEncoder.encode("title", "UTF-8") + "=" + URLEncoder.encode(title, "UTF-8") + "&" +
+                        URLEncoder.encode("email", "UTF-8") + "=" + URLEncoder.encode(email, "UTF-8") + "&" +
+                        URLEncoder.encode("stAddress", "UTF-8") + "=" + URLEncoder.encode(stAddress, "UTF-8") + "&" +
+                        URLEncoder.encode("city", "UTF-8") + "=" + URLEncoder.encode(city, "UTF-8") + "&" +
+                        URLEncoder.encode("state", "UTF-8") + "=" + URLEncoder.encode(state, "UTF-8") + "&" +
+                        URLEncoder.encode("zip", "UTF-8") + "=" + URLEncoder.encode(zip, "UTF-8") + "&" +
+                        URLEncoder.encode("description", "UTF-8") + "=" + URLEncoder.encode(description, "UTF-8");
+                bufferedWriter.write(data);
+                bufferedWriter.flush();
+                bufferedWriter.close();
+                OS.close();
+
+                InputStream IS = httpURLConnection.getInputStream();
+                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(IS, "iso-8859-1"));
+                String result = "";
+                String line = "";
+
+                while((line = bufferedReader.readLine()) != null){
+                    result += line;
+                }
+
+                bufferedReader.close();
+                IS.close();
+                httpURLConnection.disconnect();
+
+                return result;
+
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            } catch (IOException e){
+                e.printStackTrace();
+            }
+        }
+
         return null;
     }
+
+    /*protected boolean isValid(String result){
+        if (result != "Incorrect username and password... Try again"){
+            return true;
+        }
+        else return false;
+    }*/
 
     protected void onProgressUpdate(Void... values){
         super.onProgressUpdate(values);
@@ -138,6 +201,11 @@ public class BackgroundTask extends AsyncTask<String, Void, String> {
     protected void onPostExecute(String result){
         Toast toast = Toast.makeText(ctx, result, Toast.LENGTH_SHORT);
         toast.show();
+
+        /*if(result != "Incorrect username and password... Try again"){
+            LoginActivity loginActivity = new LoginActivity();
+            loginActivity.isValid();
+        }*/
     }
 
 }
