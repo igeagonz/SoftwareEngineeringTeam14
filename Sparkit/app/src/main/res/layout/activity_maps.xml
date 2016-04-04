@@ -10,13 +10,13 @@
 
 
         <EditText
-            android:layout_width="322dp"
+            android:layout_width="275dp"
             android:layout_height="wrap_content"
             android:id="@+id/TFaddress" />
         <Button
             style="?android:attr/buttonStyleSmall"
-            android:layout_width="match_parent"
-            android:layout_height="75dp"
+            android:layout_width="97dp"
+            android:layout_height="60dp"
             android:text="Search"
             android:id="@+id/Bsearch"
             android:onClick="onSearch" />
@@ -26,9 +26,14 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:id="@+id/map"
         android:name="com.google.android.gms.maps.SupportMapFragment"
-        android:layout_width="394dp"
-        android:layout_height="479dp"
+        android:layout_width="395dp"
+        android:layout_height="462dp"
         tools:context="com.sparkit.sparkit.MapsActivity" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageView" />
 
 
 </LinearLayout>
