@@ -8,27 +8,36 @@
     tools:context="com.sparkit.sparkit.MainPage">
 
     <TextView
-        android:layout_width="341dp"
+        android:layout_width="230dp"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="@string/welcome_message"
-        android:id="@+id/textView"
-        android:layout_weight="0.09" />
+        android:id="@+id/textView" />
 
     <Button
         android:layout_width="wrap_content"
+        android:layout_height="33dp"
+        android:text="@string/logout"
+        android:id="@+id/logout_button"
+        android:layout_gravity="right"
+        android:onClick="onLogout"
+        android:layout_weight="0.01" />
+
+    <Button
+        android:layout_width="106dp"
         android:layout_height="wrap_content"
         android:text="@string/post_button"
-        android:id="@+id/button"
+        android:id="@+id/post_button"
         android:layout_gravity="center_horizontal"
         android:layout_weight="0.09"
         android:onClick="onPost" />
 
     <Button
-        android:layout_width="79dp"
-        android:layout_height="58dp"
-        android:text="Logout"
-        android:id="@+id/logout_button"
+        android:layout_width="101dp"
+        android:layout_height="wrap_content"
+        android:text="@string/search_button"
+        android:id="@+id/search_button"
         android:layout_gravity="center_horizontal"
-        android:onClick="onLogout" />
+        android:onClick="onSearch"/>
+
 </LinearLayout>

@@ -27,5 +27,9 @@
     <string name="CreatePosting_button">Create Posting</string>
     <string name="post_button">Post</string>
     <string name="welcome_message">Welcome to SParkit!</string>
+    <string name="logout">Logout</string>
+    <string name="search_button">Search</string>
+    <string name="logout_button">Logout</string>
+    <string name="MainMenu_button">Main Menu</string>
 
 </resources>

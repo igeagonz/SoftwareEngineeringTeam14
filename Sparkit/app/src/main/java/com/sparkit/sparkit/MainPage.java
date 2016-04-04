@@ -24,4 +24,8 @@ public class MainPage extends Activity {
         startActivity(new Intent(MainPage.this, CreatePosting.class));
     }
 
+    public void onSearch(View view){
+        startActivity(new Intent(MainPage.this, SearchParking.class));
+    }
+
 }
