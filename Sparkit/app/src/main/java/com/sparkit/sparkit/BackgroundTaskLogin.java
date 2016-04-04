@@ -1,5 +1,6 @@
 package com.sparkit.sparkit;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -22,7 +23,7 @@ import java.net.URLEncoder;
 /**
  * Created by nacho on 3/11/16.
  */
-public class BackgroundTaskLogin{
+public class BackgroundTaskLogin extends Activity {
 
     Context ctx;
     //AlertDialog alertDialog;
@@ -67,7 +68,7 @@ public class BackgroundTaskLogin{
 
 
                 if(!result.equals("Incorrect username and password... Try again")){
-                    loginActivity.goToMain();
+                    startActivity(new Intent(this, MainPage.class));
                 }
 
                 Toast toast = Toast.makeText(ctx, result, Toast.LENGTH_SHORT);
@@ -85,14 +86,6 @@ public class BackgroundTaskLogin{
     }
 
 
-    protected void onPostExecute(String result){
-
-
-        /*
-        activity.updateStatus(result);
-        */
-
-    }
 
 }
 
