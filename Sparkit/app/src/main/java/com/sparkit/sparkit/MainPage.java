@@ -25,7 +25,7 @@ public class MainPage extends Activity {
     }
 
     public void onSearch(View view){
-        startActivity(new Intent(MainPage.this, SearchParking.class));
+        startActivity(new Intent(MainPage.this, MapsActivity.class));
     }
 
 }

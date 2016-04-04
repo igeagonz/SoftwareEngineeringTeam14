@@ -31,5 +31,6 @@
     <string name="search_button">Search</string>
     <string name="logout_button">Logout</string>
     <string name="MainMenu_button">Main Menu</string>
+    <string name="title_activity_maps">Map</string>
 
 </resources>
