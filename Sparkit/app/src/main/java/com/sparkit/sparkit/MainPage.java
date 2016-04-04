@@ -9,7 +9,7 @@ import android.view.View;
  * Created by nacho on 3/17/16.
  */
 public class MainPage extends Activity {
-//just a test
+
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
