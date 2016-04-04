@@ -182,13 +182,6 @@ public class BackgroundTask extends AsyncTask<String, Void, String> {
         return null;
     }
 
-    /*protected boolean isValid(String result){
-        if (result != "Incorrect username and password... Try again"){
-            return true;
-        }
-        else return false;
-    }*/
-
     protected void onProgressUpdate(Void... values){
         super.onProgressUpdate(values);
     }
@@ -201,6 +194,10 @@ public class BackgroundTask extends AsyncTask<String, Void, String> {
     protected void onPostExecute(String result){
         Toast toast = Toast.makeText(ctx, result, Toast.LENGTH_SHORT);
         toast.show();
+
+        /*
+        activity.updateStatus(result);
+        */
 
         /*if(result != "Incorrect username and password... Try again"){
             LoginActivity loginActivity = new LoginActivity();
