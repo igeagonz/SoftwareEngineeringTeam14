@@ -31,12 +31,13 @@ public class BackgroundTaskLogin extends Activity {
         this.ctx = ctx;
 
     }
-    protected void doInBackground(String emailLogin, String passwordLogin, LoginActivity loginActivity){
+    public String doInBackground(String emailLogin, String passwordLogin){
 
         String login_url = "http://130.184.99.197/login.php";
         //String method  = params[0];
         String email = emailLogin;
         String password = passwordLogin;
+        String result = "";
 
             try {
                 URL url = new URL(login_url);
@@ -55,7 +56,7 @@ public class BackgroundTaskLogin extends Activity {
 
                 InputStream IS = httpURLConnection.getInputStream();
                 BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(IS, "iso-8859-1"));
-                String result = "";
+
                 String line = "";
 
                 while((line = bufferedReader.readLine()) != null){
@@ -65,11 +66,6 @@ public class BackgroundTaskLogin extends Activity {
                 bufferedReader.close();
                 IS.close();
                 httpURLConnection.disconnect();
-
-
-                if(!result.equals("Incorrect username and password... Try again")){
-                    startActivity(new Intent(this, MainPage.class));
-                }
 
                 Toast toast = Toast.makeText(ctx, result, Toast.LENGTH_SHORT);
                 toast.show();
@@ -81,6 +77,7 @@ public class BackgroundTaskLogin extends Activity {
                 e.printStackTrace();
             }
 
+        return result;
 
 
     }

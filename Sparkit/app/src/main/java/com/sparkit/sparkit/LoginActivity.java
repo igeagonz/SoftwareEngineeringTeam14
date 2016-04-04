@@ -46,8 +46,12 @@ public class LoginActivity extends Activity {
         }
         else {
             BackgroundTaskLogin backgroundTaskLogin = new BackgroundTaskLogin(this);
-            backgroundTaskLogin.doInBackground(email, password , this);
-            //startActivity(new Intent(LoginActivity.this, MainPage.class));
+            String result = backgroundTaskLogin.doInBackground(email, password);
+
+            if(!result.equals("Incorrect username and password... Try again")){
+                startActivity(new Intent(LoginActivity.this, MainPage.class));
+            }
+            
             finish();
 
         }
