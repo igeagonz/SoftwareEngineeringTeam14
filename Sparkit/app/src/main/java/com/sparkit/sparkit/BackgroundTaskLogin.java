@@ -1,6 +1,5 @@
 package com.sparkit.sparkit;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -23,21 +22,23 @@ import java.net.URLEncoder;
 /**
  * Created by nacho on 3/11/16.
  */
-public class BackgroundTaskLogin extends Activity {
+public class BackgroundTaskLogin extends AsyncTask<LoginActivity, Void, String> {
 
     Context ctx;
-    //AlertDialog alertDialog;
+    AlertDialog alertDialog;
+    LoginActivity loginActivity;
     BackgroundTaskLogin(Context ctx){
         this.ctx = ctx;
 
     }
-    public String doInBackground(String emailLogin, String passwordLogin){
+
+    @Override
+    protected String doInBackground(LoginActivity... params){
 
         String login_url = "http://130.184.99.197/login.php";
-        //String method  = params[0];
-        String email = emailLogin;
-        String password = passwordLogin;
-        String result = "";
+        loginActivity = params[0];
+        String email = loginActivity.email;
+        String password = loginActivity.password;
 
             try {
                 URL url = new URL(login_url);
@@ -56,7 +57,7 @@ public class BackgroundTaskLogin extends Activity {
 
                 InputStream IS = httpURLConnection.getInputStream();
                 BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(IS, "iso-8859-1"));
-
+                String result = "";
                 String line = "";
 
                 while((line = bufferedReader.readLine()) != null){
@@ -67,8 +68,7 @@ public class BackgroundTaskLogin extends Activity {
                 IS.close();
                 httpURLConnection.disconnect();
 
-                Toast toast = Toast.makeText(ctx, result, Toast.LENGTH_SHORT);
-                toast.show();
+                return result;
 
 
             } catch (MalformedURLException e) {
@@ -77,12 +77,38 @@ public class BackgroundTaskLogin extends Activity {
                 e.printStackTrace();
             }
 
-        return result;
+        return null;
+        }
 
 
+    protected void onProgressUpdate(Void... values){
+        super.onProgressUpdate(values);
     }
 
+    protected void onPreExecute(){
+        alertDialog = new AlertDialog.Builder(ctx).create();
+        alertDialog.setTitle("Login Status");
+    }
 
+    protected void onPostExecute(String result){
+        Toast toast = Toast.makeText(ctx, result, Toast.LENGTH_SHORT);
+        toast.show();
+
+        if(!result.equals("Incorrect username and password... Try again")){
+            loginActivity.goToMain();
+        }
+        else{
+            loginActivity.restartLogin();
+        }
+
+        /*
+        activity.updateStatus(result);
+        */
+
+        /*if(result != "Incorrect username and password... Try again"){
+            LoginActivity loginActivity = new LoginActivity();
+            loginActivity.isValid();
+        }*/
+    }
 
 }
-

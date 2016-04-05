@@ -15,6 +15,7 @@ import android.widget.Toast;
 public class LoginActivity extends Activity {
 
     EditText ET_email, ET_password;
+    String email, password;
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
@@ -31,8 +32,8 @@ public class LoginActivity extends Activity {
 
     public void userLogin(View view){
         //Logging in Logic
-        String email = ET_email.getText().toString();
-        String password = ET_password.getText().toString();
+        email = ET_email.getText().toString();
+        password = ET_password.getText().toString();
         //String method = "login";
 
         //Error checking for valid email and password
@@ -46,11 +47,11 @@ public class LoginActivity extends Activity {
         }
         else {
             BackgroundTaskLogin backgroundTaskLogin = new BackgroundTaskLogin(this);
-            String result = backgroundTaskLogin.doInBackground(email, password);
+            backgroundTaskLogin.execute(this);
 
-            if(!result.equals("Incorrect username and password... Try again")){
+            /*if(!result.equals("Incorrect username and password... Try again")){
                 startActivity(new Intent(LoginActivity.this, MainPage.class));
-            }
+            }*/
             
             finish();
 
@@ -79,8 +80,11 @@ public class LoginActivity extends Activity {
     }
 
     public void goToMain(){
-        startActivity(new Intent(LoginActivity.this, MainPage.class));
+        startActivity(new Intent(this, MainPage.class));
     }
 
+    public void restartLogin() {
+        startActivity(new Intent(this, LoginActivity.class));
+    }
 }
 

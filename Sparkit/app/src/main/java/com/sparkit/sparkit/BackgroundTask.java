@@ -195,14 +195,7 @@ public class BackgroundTask extends AsyncTask<String, Void, String> {
         Toast toast = Toast.makeText(ctx, result, Toast.LENGTH_SHORT);
         toast.show();
 
-        /*
-        activity.updateStatus(result);
-        */
 
-        /*if(result != "Incorrect username and password... Try again"){
-            LoginActivity loginActivity = new LoginActivity();
-            loginActivity.isValid();
-        }*/
     }
 
 }
