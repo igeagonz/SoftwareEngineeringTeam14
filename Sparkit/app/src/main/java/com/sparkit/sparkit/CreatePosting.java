@@ -1,6 +1,7 @@
 package com.sparkit.sparkit;
 
 import android.app.*;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.*;
 import android.widget.*;
@@ -45,6 +46,10 @@ public class CreatePosting extends Activity
 
         finish();
 
+    }
+
+    public void onPostList(View view){
+        startActivity(new Intent(this, MapsActivity.class));
     }
 
 

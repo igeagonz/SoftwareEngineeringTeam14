@@ -24,8 +24,10 @@ import com.google.android.gms.maps.model.Marker;
 import java.io.IOException;
 import java.util.List;
 
-public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
+public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
+    EditText ET_title, ET_email, ET_stAddress, ET_city, ET_state, ET_zip, ET_description;
+    String title, email,stAddress, city, state, zip, description;
     private GoogleMap mMap;
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
@@ -75,7 +77,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             // for ActivityCompat#requestPermissions for more details.
             return;
         }
-        mMap.addMarker(new MarkerOptions().position(new LatLng(0, 0)).title("marker"));
+        //mMap.addMarker(new MarkerOptions().position(new LatLng(0, 0)).title("marker"));
         mMap.setMyLocationEnabled(true);
 
 
@@ -104,7 +106,25 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         );
         AppIndex.AppIndexApi.start(client, viewAction);
     }
+    public void onPostList (View view) {
+        stAddress = ET_stAddress.getText().toString();
+        EditText location_tf = (EditText)findViewById(R.id.TFaddress);
+        String location = location_tf.getText().toString();
+        List<Address> addressList = null;
+        if(location != null || !location.equals("") ) {
+            Geocoder geocoder = new Geocoder(this);
+            try {
+                addressList = geocoder.getFromLocationName(location, 1);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
 
+            Address address = addressList.get(0);
+            LatLng latLng = new LatLng(address.getLatitude(), address.getLongitude());
+            mMap.addMarker(new MarkerOptions().position(latLng).title("marker"));
+            mMap.animateCamera(CameraUpdateFactory.newLatLng(latLng));
+    }
+    }
     public void onSearch(View view) {
         EditText location_tf = (EditText)findViewById(R.id.TFaddress);
         String location = location_tf.getText().toString();
