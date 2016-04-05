@@ -29,11 +29,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     EditText ET_title, ET_email, ET_stAddress, ET_city, ET_state, ET_zip, ET_description;
     String title, email, stAddress, city, state, zip, description;
 
-    MapsActivity(String title, String stAddress){
+   /* MapsActivity(String title, String stAddress){
         this.title = title;
         this.stAddress = stAddress;
 
-    }
+    }*/
 
     private GoogleMap mMap;
     /**
