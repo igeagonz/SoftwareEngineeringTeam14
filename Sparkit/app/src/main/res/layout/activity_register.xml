@@ -11,6 +11,27 @@
     tools:context="com.sparkit.sparkit.SignupActivity">
 
     <!-- Login progress -->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="58dp">
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/editText"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:text="New User"
+            android:textAlignment="center"
+            android:textSize="30dp"
+            android:theme="@android:style/Animation.Toast"
+            android:visibility="visible"
+            android:typeface="monospace" />
+    </RelativeLayout>
+
     <ProgressBar
         android:id="@+id/signup_progress"
         style="?android:attr/progressBarStyleLarge"
@@ -21,15 +42,16 @@
 
     <ScrollView
         android:id="@+id/signup_form"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="323dp"
+        android:layout_height="163dp"
         android:fillViewport="false">
 
         <LinearLayout
             android:id="@+id/userinfo_form"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:weightSum="1">
 
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
@@ -42,7 +64,8 @@
                     android:hint="@string/prompt_fname"
                     android:inputType="textPersonName"
                     android:maxLines="1"
-                    android:singleLine="true" />
+                    android:singleLine="true"
+                    android:background="#fcf411" />
 
             </android.support.design.widget.TextInputLayout>
 
@@ -57,7 +80,8 @@
                     android:hint="@string/prompt_lname"
                     android:inputType="textPersonName"
                     android:maxLines="1"
-                    android:singleLine="true" />
+                    android:singleLine="true"
+                    android:background="#fcf411" />
 
             </android.support.design.widget.TextInputLayout>
 
@@ -72,7 +96,8 @@
                     android:hint="@string/prompt_email"
                     android:inputType="textEmailAddress"
                     android:maxLines="1"
-                    android:singleLine="true" />
+                    android:singleLine="true"
+                    android:background="#fcf411" />
 
             </android.support.design.widget.TextInputLayout>
 
@@ -89,21 +114,32 @@
                     android:imeOptions="actionUnspecified"
                     android:inputType="textPassword"
                     android:maxLines="1"
-                    android:singleLine="true" />
+                    android:singleLine="true"
+                    android:background="#fcf411" />
 
             </android.support.design.widget.TextInputLayout>
 
-            <Button
-                android:id="@+id/register_button"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                style="?android:textAppearanceSmall"
-                android:text="@string/register"
-                android:layout_marginTop="10dp"
-                android:textStyle="bold"
-                android:onClick="userReg"/>
-
         </LinearLayout>
     </ScrollView>
+
+    <ProgressBar
+        style="?android:attr/progressBarStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/progressBar"
+        android:layout_weight="2012.06" />
+
+    <Button
+        android:id="@+id/register_button"
+        android:layout_width="193dp"
+        android:layout_height="wrap_content"
+        style="?android:textAppearanceSmall"
+        android:text="@string/register"
+        android:layout_marginTop="10dp"
+        android:textStyle="bold"
+        android:onClick="userReg"
+        android:background="#b6b6b6"
+        android:capitalize="words"
+        android:clickable="false" />
 
 </LinearLayout>
