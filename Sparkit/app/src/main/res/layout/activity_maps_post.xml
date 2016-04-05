@@ -19,10 +19,10 @@
             style="?android:attr/buttonStyleSmall"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Search"
-            android:id="@+id/Bsearch"
+            android:text="Post"
+            android:id="@+id/Bpost"
             android:layout_gravity="right"
-            android:onClick="onSearch" />
+            android:onClick="onPost" />
         <Button
             style="?android:attr/buttonStyleSmall"
             android:layout_width="wrap_content"

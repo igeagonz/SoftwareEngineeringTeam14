@@ -51,7 +51,7 @@ public class CreatePosting extends Activity
 
     public void onPostList(View view){
         //mapsActivity = new MapsActivity(title, stAddress); //Added maps activity instance
-        startActivity(new Intent(this, MapsActivity.class));
+        startActivity(new Intent(this, MapsActivityPost.class));
     }
 
 

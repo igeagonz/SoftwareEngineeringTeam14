@@ -33,5 +33,7 @@
     <string name="MainMenu_button">Main Menu</string>
     <string name="title_activity_maps">Map</string>
     <string name="title_activity_maps_activity_db">MapsActivityDB</string>
+    <string name="google_app_id">sonorous-dragon-127019</string>;
+
 
 </resources>
