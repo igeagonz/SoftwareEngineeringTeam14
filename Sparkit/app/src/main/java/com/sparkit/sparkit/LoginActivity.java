@@ -15,6 +15,7 @@ import android.widget.Toast;
 public class LoginActivity extends Activity {
 
     EditText ET_email, ET_password;
+    String email, password;
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
@@ -31,9 +32,9 @@ public class LoginActivity extends Activity {
 
     public void userLogin(View view){
         //Logging in Logic
-        String email = ET_email.getText().toString();
-        String password = ET_password.getText().toString();
-        String method = "login";
+        email = ET_email.getText().toString();
+        password = ET_password.getText().toString();
+        //String method = "login";
 
         //Error checking for valid email and password
         if(!validateEmail(email)){
@@ -45,18 +46,18 @@ public class LoginActivity extends Activity {
             ET_password.requestFocus();
         }
         else {
-            //Toast.makeText(LoginActivity.this, "Input Validation Success", Toast.LENGTH_LONG).show();
-            BackgroundTask backgroundTask = new BackgroundTask(this);
-            backgroundTask.execute(method, email, password);
-            startActivity(new Intent(LoginActivity.this, MainPage.class));
+            BackgroundTaskLogin backgroundTaskLogin = new BackgroundTaskLogin(this);
+            backgroundTaskLogin.execute(this);
+
+            /*if(!result.equals("Incorrect username and password... Try again")){
+                startActivity(new Intent(LoginActivity.this, MainPage.class));
+            }*/
+            
             finish();
 
         }
     }
 
-    /*public void isValid(){
-        startActivity(new Intent(LoginActivity.this, MainPage.class));
-    }*/
 
     //Return true if password is valid and false if password is invalid
     protected boolean validatePassword(String password) {
@@ -78,14 +79,12 @@ public class LoginActivity extends Activity {
         return matcher.matches();
     }
 
-    /*public void doConnect(){
-        startActivity(new Intent(LoginActivity.this, MainPage.class));
+    public void goToMain(){
+        startActivity(new Intent(this, MainPage.class));
     }
 
-    public void dontConnect(){
-        startActivity(new Intent(LoginActivity.this, LoginActivity.class));
-    }*/
-
-
+    public void restartLogin() {
+        startActivity(new Intent(this, LoginActivity.class));
+    }
 }
 

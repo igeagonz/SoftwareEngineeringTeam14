@@ -8,7 +8,8 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.sparkit.sparkit.LoginActivity">
+    tools:context="com.sparkit.sparkit.LoginActivity"
+    android:background="#9c9ee3">
 
     <!-- Login progress -->
     <ProgressBar
@@ -19,10 +20,24 @@
         android:layout_marginBottom="8dp"
         android:visibility="gone" />
 
-    <ScrollView
-        android:id="@+id/login_form"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="216dp"
+        android:layout_weight="0.5">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/imageView2"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:src="@mipmap/ic_launcher"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:scaleType="fitCenter" />
+    </RelativeLayout>
 
         <LinearLayout
             android:id="@+id/email_login_form"
@@ -41,7 +56,8 @@
                     android:hint="@string/prompt_email"
                     android:inputType="textEmailAddress"
                     android:maxLines="1"
-                    android:singleLine="true" />
+                    android:singleLine="true"
+                    android:background="#fcf411" />
 
             </android.support.design.widget.TextInputLayout>
 
@@ -60,7 +76,8 @@
                     android:imeOptions="actionUnspecified"
                     android:inputType="textPassword"
                     android:maxLines="1"
-                    android:singleLine="true" />
+                    android:singleLine="true"
+                    android:background="#fcf411" />
 
             </android.support.design.widget.TextInputLayout>
 
@@ -74,7 +91,6 @@
                 android:textStyle="bold"
                 android:onClick="userLogin"
                 android:nestedScrollingEnabled="false" />
-
             <Button
                 android:id="@+id/signup_button"
                 android:layout_width="match_parent"
@@ -83,9 +99,9 @@
                 android:text="@string/action_sign_up"
                 android:layout_marginTop="10dp"
                 android:textStyle="bold"
-                android:onClick="userSignup"/>
+                android:onClick="userSignup"
+                android:background="#d3b0b0" />
 
         </LinearLayout>
-    </ScrollView>
 
 </LinearLayout>
