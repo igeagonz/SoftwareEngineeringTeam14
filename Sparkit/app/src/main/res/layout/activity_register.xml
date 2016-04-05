@@ -8,29 +8,19 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.sparkit.sparkit.SignupActivity">
+    tools:context="com.sparkit.sparkit.SignupActivity"
+    android:background="#32eb11">
 
     <!-- Login progress -->
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="58dp">
 
-        <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/editText"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
-            android:text="New User"
-            android:textAlignment="center"
-            android:textSize="30dp"
-            android:theme="@android:style/Animation.Toast"
-            android:visibility="visible"
-            android:typeface="monospace" />
-    </RelativeLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="CREATE ACCOUNT"
+        android:textSize="70px"
+        android:id="@+id/textView2"
+        android:layout_gravity="center_horizontal" />
 
     <ProgressBar
         android:id="@+id/signup_progress"
@@ -40,11 +30,7 @@
         android:layout_marginBottom="8dp"
         android:visibility="gone" />
 
-    <ScrollView
-        android:id="@+id/signup_form"
-        android:layout_width="323dp"
-        android:layout_height="163dp"
-        android:fillViewport="false">
+
 
         <LinearLayout
             android:id="@+id/userinfo_form"
@@ -120,14 +106,6 @@
             </android.support.design.widget.TextInputLayout>
 
         </LinearLayout>
-    </ScrollView>
-
-    <ProgressBar
-        style="?android:attr/progressBarStyleSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/progressBar"
-        android:layout_weight="2012.06" />
 
     <Button
         android:id="@+id/register_button"
