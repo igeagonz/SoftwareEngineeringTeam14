@@ -14,6 +14,7 @@ public class CreatePosting extends Activity
 {
     EditText ET_title, ET_email, ET_stAddress, ET_city, ET_state, ET_zip, ET_description;
     String title, email,stAddress, city, state, zip, description;
+    MapsActivity mapsActivity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -49,6 +50,8 @@ public class CreatePosting extends Activity
     }
 
     public void onPostList(View view){
+
+        mapsActivity = new MapsActivity(title, stAddress); //Added maps activity instance
         startActivity(new Intent(this, MapsActivity.class));
     }
 

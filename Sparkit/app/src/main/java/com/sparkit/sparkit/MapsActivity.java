@@ -27,7 +27,14 @@ import java.util.List;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
     EditText ET_title, ET_email, ET_stAddress, ET_city, ET_state, ET_zip, ET_description;
-    String title, email,stAddress, city, state, zip, description;
+    String title, email, stAddress, city, state, zip, description;
+
+    MapsActivity(String title, String stAddress){
+        this.title = title;
+        this.stAddress = stAddress;
+
+    }
+
     private GoogleMap mMap;
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
@@ -107,8 +114,25 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         AppIndex.AppIndexApi.start(client, viewAction);
     }
     public void onPostList (View view) {
-        stAddress = ET_stAddress.getText().toString();
-        EditText location_tf = (EditText)findViewById(R.id.TFaddress);
+        //stAddress = ET_stAddress.getText().toString();
+
+        List<Address> addressList = null;
+        if(stAddress != null || !stAddress.equals("") ) {
+            Geocoder geocoder = new Geocoder(this);
+            try {
+                addressList = geocoder.getFromLocationName(stAddress, 1);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            Address address = addressList.get(0);
+            LatLng latLng = new LatLng(address.getLatitude(), address.getLongitude());
+            mMap.addMarker(new MarkerOptions().position(latLng).title(title));
+            mMap.animateCamera(CameraUpdateFactory.newLatLng(latLng));
+        }
+
+
+        /*EditText location_tf = (EditText)findViewById(R.id.TFaddress);
         String location = location_tf.getText().toString();
         List<Address> addressList = null;
         if(location != null || !location.equals("") ) {
@@ -123,7 +147,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             LatLng latLng = new LatLng(address.getLatitude(), address.getLongitude());
             mMap.addMarker(new MarkerOptions().position(latLng).title("marker"));
             mMap.animateCamera(CameraUpdateFactory.newLatLng(latLng));
-    }
+         }*/
     }
     public void onSearch(View view) {
         EditText location_tf = (EditText)findViewById(R.id.TFaddress);
