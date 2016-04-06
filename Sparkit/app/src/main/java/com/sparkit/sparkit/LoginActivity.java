@@ -53,7 +53,7 @@ public class LoginActivity extends Activity {
                 startActivity(new Intent(LoginActivity.this, MainPage.class));
             }*/
             
-            finish();
+            //finish();
 
         }
     }
@@ -80,10 +80,14 @@ public class LoginActivity extends Activity {
     }
 
     public void goToMain(){
+
+        finish();
         startActivity(new Intent(this, MainPage.class));
     }
 
     public void restartLogin() {
+
+        finish();
         startActivity(new Intent(this, LoginActivity.class));
     }
 }
