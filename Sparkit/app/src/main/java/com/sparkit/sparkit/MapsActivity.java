@@ -78,14 +78,16 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         mMap = googleMap;
 
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
+        //mMap.setMyLocationEnabled(true);
+
+        /*if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
                 == PackageManager.PERMISSION_GRANTED) {
             mMap.setMyLocationEnabled(true);
         }
         else{
             Toast toast = Toast.makeText(getApplicationContext(),"No permissions for fine location services..", Toast.LENGTH_LONG);
             toast.show();
-        }
+        }*/
 
         mMap.getUiSettings().setZoomControlsEnabled(true);
 
@@ -164,13 +166,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
                 Address address = addressList.get(0);
                 LatLng latLng = new LatLng(address.getLatitude(), address.getLongitude());
-                mMap.addMarker(new MarkerOptions().position(latLng).title(location));
+                //mMap.addMarker(new MarkerOptions().position(latLng).title(location));
                 mMap.animateCamera(CameraUpdateFactory.newLatLng(latLng));
 
             }
-
-
-
     }
 
     @Override
@@ -196,6 +195,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     @Override
     public boolean onMyLocationButtonClick() {
         return false;
+    }
+
+    public void backToMain(View view){
+        startActivity(new Intent(MapsActivity.this, MainPage.class));
     }
 
 
