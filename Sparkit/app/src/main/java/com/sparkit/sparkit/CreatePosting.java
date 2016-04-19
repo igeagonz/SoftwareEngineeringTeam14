@@ -14,7 +14,6 @@ public class CreatePosting extends Activity
 {
     EditText ET_title, ET_email, ET_stAddress, ET_city, ET_state, ET_zip, ET_description;
     String title, email,stAddress, city, state, zip, description;
-    MapsActivity mapsActivity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
