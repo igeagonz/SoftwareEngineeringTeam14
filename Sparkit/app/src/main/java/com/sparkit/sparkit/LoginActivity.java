@@ -82,6 +82,8 @@ public class LoginActivity extends Activity {
     public void goToMain(){
 
         finish();
+        Intent intent = new Intent(this, MainPage.class);
+        intent.putExtra("email",email);
         startActivity(new Intent(this, MainPage.class));
     }
 

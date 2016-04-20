@@ -5,47 +5,68 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.sparkit.sparkit.CreatePosting">
+
+    <TextView
+        android:layout_width="175dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="20dp"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textSize="30sp"
+        android:fontFamily="sans-serif-light"
+        android:id="@+id/reservationText"
+        android:text="Reservation"
+        android:layout_gravity="center_horizontal"/>
+
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
         android:id="@+id/postTitle"
         android:hint="@string/prompt_title"/>
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
         android:id="@+id/postEmail"
         android:hint="@string/prompt_LoginEmail"/>
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
         android:id="@+id/postStAddress"
         android:hint="@string/prompt_StAddress"/>
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
         android:id="@+id/postCity"
         android:hint="@string/prompt_City"/>
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
         android:id="@+id/postState"
         android:hint="@string/prompt_State"/>
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
         android:id="@+id/postZip"
         android:hint="@string/prompt_ZIPcode"/>
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
         android:id="@+id/postDescription"
         android:hint="@string/prompt_Description"/>
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
         android:text="@string/CreatePosting_button"
-        android:onClick="onCreatePost"/>
+        android:onClick="onCreatePost"
+        android:layout_gravity="center_horizontal" />
     
 </LinearLayout>

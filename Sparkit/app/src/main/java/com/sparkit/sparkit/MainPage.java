@@ -12,10 +12,26 @@ import java.util.ArrayList;
  */
 public class MainPage extends Activity {
 
+    String email;
+
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_page);
+
+        if(savedInstanceState == null) {
+            Bundle extras = getIntent().getExtras();
+            if (extras == null) {
+                email = null;
+            } else {
+                email = extras.getString("reserve_address");
+            }
+        }
+        else{
+            email = (String)savedInstanceState.getSerializable("email");
+        }
+
+
     }
 
     public void onLogout(View view){

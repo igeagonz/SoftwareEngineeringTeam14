@@ -37,9 +37,8 @@ import java.util.List;
 
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback,
-        GoogleMap.OnMyLocationButtonClickListener {
-    EditText ET_title, ET_email, ET_stAddress, ET_city, ET_state, ET_zip, ET_description;
-    String title, email, stAddress, city, state, zip, description;
+        GoogleMap.OnMyLocationButtonClickListener, GoogleMap.OnInfoWindowClickListener {
+
     ArrayList<String> addresses = new ArrayList<String>();
 
     private GoogleMap mMap;
@@ -104,31 +103,23 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 for (int j = 0; j < coordinates.size(); j++) {
                     Address address = coordinates.get(j);
                     LatLng latLng = new LatLng(address.getLatitude(), address.getLongitude());
-                    mMap.addMarker(new MarkerOptions().position(latLng).title("marker")); //change title
+                    mMap.addMarker(new MarkerOptions().position(latLng)
+                            .title(addresses.get(i))
+                            .position(latLng)
+                            .snippet("Click to Reserve"));
+                    mMap.setOnInfoWindowClickListener(MapsActivity.this);
                 }
             }
         }
-
         mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(36.0626, -94.1574), 10));
+    }
 
-        /*currentLocation = LocationServices.FusedLocationApi.getLastLocation(client);
-        if(currentLocation != null)
-        {
-            Double lat = currentLocation.getLatitude();
-            Double lng = currentLocation.getLongitude();
-            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(lat, lng),5));
-        }*/
-        //initialize to current location-GJ
-        /*if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            // TODO: Consider calling
-            //    ActivityCompat#requestPermissions
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
-            return;
-        }*/
+    @Override
+    public void onInfoWindowClick(Marker marker) {
+        Intent intent = new Intent(this, ReserveActivity.class);
+        intent.putExtra("reserve_address", marker.getTitle());
+        startActivity(intent);
+
     }
 
     @Override
@@ -200,6 +191,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public void backToMain(View view){
         startActivity(new Intent(MapsActivity.this, MainPage.class));
     }
+
 
 
 }

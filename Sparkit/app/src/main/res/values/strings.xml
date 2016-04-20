@@ -24,9 +24,9 @@
     <string name="prompt_State">State</string>
     <string name="prompt_ZIPcode">Zip Code</string>
     <string name="prompt_Description">Description</string>
-    <string name="CreatePosting_button">Create Posting</string>
+    <string name="CreatePosting_button">Create Post</string>
     <string name="post_button">Post</string>
-    <string name="welcome_message">Welcome to SParkit!</string>
+    <string name="welcome_message">SParkit Home</string>
     <string name="logout">Logout</string>
     <string name="search_button">Search</string>
     <string name="logout_button">Logout</string>

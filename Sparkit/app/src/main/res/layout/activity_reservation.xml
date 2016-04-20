@@ -8,22 +8,22 @@
         android:layout_width="71dp"
         android:layout_height="wrap_content"
         android:text="Home"
-        android:id="@+id/homeButton" />
+        android:id="@+id/homeButton"
+        android:onClick="goHome"/>
 
     <TextView
         android:layout_width="175dp"
         android:layout_height="50dp"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Reservation"
         android:textSize="30sp"
         android:id="@+id/reservationText"
+        android:text="Reservation"
         android:layout_gravity="center_horizontal"/>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="fill_parent"
         android:orientation="vertical">
-
 
         <EditText
             android:layout_width="fill_parent"
@@ -34,12 +34,19 @@
             android:layout_marginTop="20dp"
             android:hint="Email"/>
 
+        <EditText
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:id="@+id/address"
+            android:layout_marginTop="20dp"/>
+
         <Spinner
             android:layout_width="149dp"
             android:layout_height="55dp"
             android:id="@+id/spinner1"
             android:background="@android:drawable/btn_dropdown"
-            android:spinngerMode="dropdown"
+            android:spinnerMode="dropdown"
             android:layout_marginTop="15dp" />
 
         <Button
