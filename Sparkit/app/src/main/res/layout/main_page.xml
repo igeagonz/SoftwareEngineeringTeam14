@@ -23,11 +23,22 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="20dp"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="@string/welcome_message"
+        android:text="SParkit Home"
         android:textAlignment = "center"
         android:textSize="30sp"
         android:fontFamily="sans-serif-light"
-        android:id="@+id/textView" />
+        android:id="@+id/homeMessage" />
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
+        android:layout_marginBottom="20dp"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textAlignment = "center"
+        android:textSize="20sp"
+        android:fontFamily="sans-serif-light"
+        android:textStyle="italic"
+        android:id="@+id/welcomeMessage" />
 
     <LinearLayout
         android:layout_width="match_parent"

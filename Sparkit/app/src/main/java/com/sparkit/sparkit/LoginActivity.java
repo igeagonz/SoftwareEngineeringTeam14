@@ -3,6 +3,8 @@ package com.sparkit.sparkit;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+
+import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import android.app.*;
@@ -48,13 +50,6 @@ public class LoginActivity extends Activity {
         else {
             BackgroundTaskLogin backgroundTaskLogin = new BackgroundTaskLogin(this);
             backgroundTaskLogin.execute(this);
-
-            /*if(!result.equals("Incorrect username and password... Try again")){
-                startActivity(new Intent(LoginActivity.this, MainPage.class));
-            }*/
-            
-            //finish();
-
         }
     }
 
@@ -79,12 +74,13 @@ public class LoginActivity extends Activity {
         return matcher.matches();
     }
 
-    public void goToMain(){
-
-        finish();
+    public void goToMain(String result){
         Intent intent = new Intent(this, MainPage.class);
-        intent.putExtra("email",email);
+        intent.putExtra("email", email);
+        intent.putExtra("welcomeMessage", result);
         startActivity(new Intent(this, MainPage.class));
+        finish();
+
     }
 
     public void restartLogin() {

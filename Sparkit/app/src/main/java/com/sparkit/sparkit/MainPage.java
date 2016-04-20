@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.EditText;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
@@ -19,18 +21,25 @@ public class MainPage extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_page);
 
+        String welcomeMessage = null;
+
         if(savedInstanceState == null) {
             Bundle extras = getIntent().getExtras();
             if (extras == null) {
                 email = null;
+                welcomeMessage = null;
             } else {
-                email = extras.getString("reserve_address");
+                email = extras.getString("email");
+                welcomeMessage = extras.getString("welcomeMessage");
             }
         }
         else{
             email = (String)savedInstanceState.getSerializable("email");
+            welcomeMessage = (String)savedInstanceState.getSerializable("welcomeMessage");
         }
 
+        TextView textView = (TextView) findViewById(R.id.welcomeMessage);
+        textView.setText(welcomeMessage);
 
     }
 

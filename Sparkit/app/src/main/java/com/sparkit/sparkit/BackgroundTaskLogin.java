@@ -17,6 +17,7 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.util.ArrayList;
 
 
 /**
@@ -95,20 +96,11 @@ public class BackgroundTaskLogin extends AsyncTask<LoginActivity, Void, String> 
         toast.show();
 
         if(!result.equals("Incorrect username and password... Try again")){
-            loginActivity.goToMain();
+            loginActivity.goToMain(result);
         }
         else{
             loginActivity.restartLogin();
         }
-
-        /*
-        activity.updateStatus(result);
-        */
-
-        /*if(result != "Incorrect username and password... Try again"){
-            LoginActivity loginActivity = new LoginActivity();
-            loginActivity.isValid();
-        }*/
     }
 
 }
