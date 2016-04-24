@@ -24,7 +24,7 @@
     <string name="prompt_State">State</string>
     <string name="prompt_ZIPcode">Zip Code</string>
     <string name="prompt_Description">Description</string>
-    <string name="CreatePosting_button">Create Post</string>
+    <string name="CreatePosting_button">Create</string>
     <string name="post_button">Post</string>
     <string name="logout">Logout</string>
     <string name="search_button">Search</string>
@@ -32,7 +32,8 @@
     <string name="MainMenu_button">Main Menu</string>
     <string name="title_activity_maps">Map</string>
     <string name="title_activity_maps_activity_db">MapsActivityDB</string>
-    <string name="google_app_id">sonorous-dragon-127019</string>;
+    <string name="google_app_id">sonorous-dragon-127019</string>
+    <string name="goHome_button">Home</string>;
 
 
 </resources>

@@ -6,15 +6,23 @@
     android:layout_height="match_parent"
     tools:context="com.sparkit.sparkit.CreatePosting">
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:text="@string/goHome_button"
+        android:onClick="goHome"
+        android:layout_gravity="left" />
+
     <TextView
         android:layout_width="175dp"
         android:layout_height="50dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="5dp"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textSize="30sp"
         android:fontFamily="sans-serif-light"
         android:id="@+id/reservationText"
-        android:text="Reservation"
+        android:text="Create Post"
         android:layout_gravity="center_horizontal"/>
 
     <EditText
@@ -23,13 +31,6 @@
         android:layout_marginTop="5dp"
         android:id="@+id/postTitle"
         android:hint="@string/prompt_title"/>
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:id="@+id/postEmail"
-        android:hint="@string/prompt_LoginEmail"/>
-
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

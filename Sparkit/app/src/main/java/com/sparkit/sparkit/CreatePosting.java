@@ -20,19 +20,34 @@ public class CreatePosting extends Activity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.create_posting);
 
+        if(savedInstanceState == null) {
+            Bundle extras = getIntent().getExtras();
+            if (extras == null) {
+                email = null;
+            } else {
+                email = extras.getString("email");
+            }
+        }
+        else{
+            email = (String)savedInstanceState.getSerializable("email");
+        }
+
         ET_title = (EditText)findViewById(R.id.postTitle);
-        ET_email = (EditText)findViewById(R.id.postEmail);
+        //ET_email = (EditText)findViewById(R.id.postEmail);
+        //ET_email.setText(email);
         ET_stAddress = (EditText)findViewById(R.id.postStAddress);
         ET_city = (EditText)findViewById(R.id.postCity);
         ET_state = (EditText)findViewById(R.id.postState);
         ET_zip = (EditText)findViewById(R.id.postZip);
         ET_description = (EditText)findViewById(R.id.postDescription);
 
+
+
     }
     public void onCreatePost(View view)
     {
         title = ET_title.getText().toString();
-        email = ET_email.getText().toString();
+        //email = ET_email.getText().toString();
         stAddress = ET_stAddress.getText().toString();
         city = ET_city.getText().toString();
         state = ET_state.getText().toString();

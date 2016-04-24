@@ -17,7 +17,7 @@ import java.util.regex.Pattern;
 public class ReserveActivity extends Activity{
 
     private EditText ET_email;
-    private String email, length;
+    private String email, welcomeMessage, length;
     private Spinner reservation_length;
 
 
@@ -37,19 +37,28 @@ public class ReserveActivity extends Activity{
         if(savedInstanceState == null) {
             Bundle extras = getIntent().getExtras();
             if (extras == null) {
+                welcomeMessage = null;
+                email = null;
                 reservation_address = null;
             } else {
+                welcomeMessage = extras.getString("welcomeMessage");
+                email = extras.getString("email");
                 reservation_address = extras.getString("reserve_address");
             }
         }
         else{
+            email = (String) savedInstanceState.getSerializable("email");
+            welcomeMessage = (String) savedInstanceState.getSerializable("welcomeMessage");
             reservation_address = (String)savedInstanceState.getSerializable("reserve_address");
         }
 
-        EditText editText = (EditText)findViewById(R.id.address);
-        editText.setText(reservation_address);
+        TextView textView = (TextView)findViewById(R.id.address);
+        textView.setText(reservation_address);
 
         ET_email = (EditText) findViewById(R.id.emailReservation);
+        ET_email.setText(email);
+
+
         reservation_length = (Spinner) findViewById(R.id.spinner1);
 
         String[] item = new String[]{"Day", "Week", "Month", "Semester"};
@@ -91,19 +100,24 @@ public class ReserveActivity extends Activity{
 
     public void onReserve(View view){
 
+        /*
         email = ET_email.getText().toString();
         //check for correct email format input
         if(!validateEmail(email)){
             ET_email.setError("Invalid Email");
             ET_email.requestFocus();
         }
+        */
 
         //BackgroundTaskReserve backgroundTaskReserve = new BackgroundTaskReserve(this);
 
     }
 
     public void goHome(View view){
-        startActivity(new Intent(this, MainPage.class));
+        Intent intent = new Intent(this, MainPage.class);
+        intent.putExtra("email", email);
+        intent.putExtra("welcomeMessage", welcomeMessage);
+        startActivity(intent);
     }
 
     protected boolean validateEmail(String email) {

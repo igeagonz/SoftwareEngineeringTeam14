@@ -40,6 +40,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         GoogleMap.OnMyLocationButtonClickListener, GoogleMap.OnInfoWindowClickListener {
 
     ArrayList<String> addresses = new ArrayList<String>();
+    String email, welcomeMessage;
 
     private GoogleMap mMap;
     /**
@@ -53,6 +54,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
+
+        email = getIntent().getStringExtra("email");
+        welcomeMessage = getIntent().getStringExtra("welcomeMessage");
 
         //retrieve arraylist of addresses
         addresses = getIntent().getStringArrayListExtra("addressList");
@@ -118,6 +122,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public void onInfoWindowClick(Marker marker) {
         Intent intent = new Intent(this, ReserveActivity.class);
         intent.putExtra("reserve_address", marker.getTitle());
+        intent.putExtra("email", email);
+        intent.putExtra("welcomeMessage", welcomeMessage);
         startActivity(intent);
 
     }
@@ -189,7 +195,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     }
 
     public void backToMain(View view){
-        startActivity(new Intent(MapsActivity.this, MainPage.class));
+        Intent intent = new Intent(this, MainPage.class);
+        intent.putExtra("welcomeMessage", welcomeMessage);
+        intent.putExtra("email",email);
+        startActivity(intent);
     }
 
 

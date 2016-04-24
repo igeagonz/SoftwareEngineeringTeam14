@@ -75,10 +75,11 @@ public class LoginActivity extends Activity {
     }
 
     public void goToMain(String result){
+
         Intent intent = new Intent(this, MainPage.class);
         intent.putExtra("email", email);
         intent.putExtra("welcomeMessage", result);
-        startActivity(new Intent(this, MainPage.class));
+        startActivity(intent);
         finish();
 
     }

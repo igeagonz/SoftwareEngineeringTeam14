@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -14,14 +15,12 @@ import java.util.ArrayList;
  */
 public class MainPage extends Activity {
 
-    String email;
+    String email, welcomeMessage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_page);
-
-        String welcomeMessage = null;
 
         if(savedInstanceState == null) {
             Bundle extras = getIntent().getExtras();
@@ -34,7 +33,10 @@ public class MainPage extends Activity {
             }
         }
         else{
+           // Bundle extras = getIntent().getExtras();
+            //email = extras.getString("email");
             email = (String)savedInstanceState.getSerializable("email");
+            //welcomeMessage = extras.getString("welcomeMessage");
             welcomeMessage = (String)savedInstanceState.getSerializable("welcomeMessage");
         }
 
@@ -48,7 +50,9 @@ public class MainPage extends Activity {
     }
 
     public void onPost(View view){
-        startActivity(new Intent(MainPage.this, CreatePosting.class));
+        Intent intent = new Intent(this, CreatePosting.class);
+        intent.putExtra("email", email);
+        startActivity(intent);
     }
 
     public void onSearch(View view){
@@ -69,6 +73,8 @@ public class MainPage extends Activity {
         finish();
         Intent intent = new Intent(MainPage.this, MapsActivity.class);
         intent.putExtra("addressList", result);
+        intent.putExtra("email", email);
+        intent.putExtra("welcomeMessage", welcomeMessage);
         startActivity(intent);
     }
 
