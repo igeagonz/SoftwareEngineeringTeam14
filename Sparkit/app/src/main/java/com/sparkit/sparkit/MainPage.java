@@ -52,6 +52,7 @@ public class MainPage extends Activity {
     public void onPost(View view){
         Intent intent = new Intent(this, CreatePosting.class);
         intent.putExtra("email", email);
+        intent.putExtra("welcomeMessage", welcomeMessage);
         startActivity(intent);
     }
 

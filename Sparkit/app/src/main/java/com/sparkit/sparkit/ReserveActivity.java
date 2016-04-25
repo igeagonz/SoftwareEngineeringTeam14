@@ -17,7 +17,7 @@ import java.util.regex.Pattern;
 public class ReserveActivity extends Activity{
 
     private EditText ET_email;
-    private String email, welcomeMessage, length;
+    public String email, welcomeMessage, address, length;
     private Spinner reservation_length;
 
 
@@ -32,28 +32,26 @@ public class ReserveActivity extends Activity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reservation);
 
-        String reservation_address;
-
         if(savedInstanceState == null) {
             Bundle extras = getIntent().getExtras();
             if (extras == null) {
                 welcomeMessage = null;
                 email = null;
-                reservation_address = null;
+                address = null;
             } else {
                 welcomeMessage = extras.getString("welcomeMessage");
                 email = extras.getString("email");
-                reservation_address = extras.getString("reserve_address");
+                address = extras.getString("reserve_address");
             }
         }
         else{
             email = (String) savedInstanceState.getSerializable("email");
             welcomeMessage = (String) savedInstanceState.getSerializable("welcomeMessage");
-            reservation_address = (String)savedInstanceState.getSerializable("reserve_address");
+            address = (String)savedInstanceState.getSerializable("reserve_address");
         }
 
         TextView textView = (TextView)findViewById(R.id.address);
-        textView.setText(reservation_address);
+        textView.setText(address);
 
         ET_email = (EditText) findViewById(R.id.emailReservation);
         ET_email.setText(email);
@@ -78,11 +76,11 @@ public class ReserveActivity extends Activity{
                         length = "Week";
                         break;
                     case 2:
-                        // Whatever you want to happen when the thrid item gets selected
+                        // Whatever you want to happen when the third item gets selected
                         length = "Month";
                         break;
                     case 3:
-                        // Whatever you want to happen when the thrid item gets selected
+                        // Whatever you want to happen when the fourth item gets selected
                         length = "Semester";
                         break;
 
@@ -94,22 +92,15 @@ public class ReserveActivity extends Activity{
 
             }
         });
-        //reservation_length.setOnItemSelectedListener(this);
 
     }
 
     public void onReserve(View view){
 
-        /*
-        email = ET_email.getText().toString();
-        //check for correct email format input
-        if(!validateEmail(email)){
-            ET_email.setError("Invalid Email");
-            ET_email.requestFocus();
-        }
-        */
+        BackgroundTaskReserve backgroundTaskReserve = new BackgroundTaskReserve(this);
+        backgroundTaskReserve.execute(this);
 
-        //BackgroundTaskReserve backgroundTaskReserve = new BackgroundTaskReserve(this);
+        finish();
 
     }
 
@@ -119,18 +110,6 @@ public class ReserveActivity extends Activity{
         intent.putExtra("welcomeMessage", welcomeMessage);
         startActivity(intent);
     }
-
-    protected boolean validateEmail(String email) {
-        String emailPattern = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
-                + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
-
-        Pattern pattern = Pattern.compile(emailPattern);
-        Matcher matcher = pattern.matcher(email);
-
-        return matcher.matches();
-    }
-
-
 
 }
 

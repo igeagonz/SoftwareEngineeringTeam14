@@ -13,7 +13,7 @@ import android.widget.*;
 public class CreatePosting extends Activity
 {
     EditText ET_title, ET_email, ET_stAddress, ET_city, ET_state, ET_zip, ET_description;
-    String title, email,stAddress, city, state, zip, description;
+    String title, email,stAddress, city, state, zip, description, welcomeMessage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -24,12 +24,15 @@ public class CreatePosting extends Activity
             Bundle extras = getIntent().getExtras();
             if (extras == null) {
                 email = null;
+                welcomeMessage = null;
             } else {
                 email = extras.getString("email");
+                welcomeMessage = extras.getString("welcomeMessage");
             }
         }
         else{
             email = (String)savedInstanceState.getSerializable("email");
+            welcomeMessage = (String)savedInstanceState.getSerializable("welcomeMessage");
         }
 
         ET_title = (EditText)findViewById(R.id.postTitle);
@@ -60,6 +63,14 @@ public class CreatePosting extends Activity
         backgroundTask.execute(method, title, email, stAddress, city, state, zip, description);
 
         finish();
+    }
+
+    public void goHome(View view){
+
+        Intent intent = new Intent(this, MainPage.class);
+        intent.putExtra("email", email);
+        intent.putExtra("welcomeMessage", welcomeMessage);
+        startActivity(intent);
 
     }
 
