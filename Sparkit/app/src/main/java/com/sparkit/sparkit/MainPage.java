@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -16,6 +17,7 @@ import java.util.ArrayList;
 public class MainPage extends Activity {
 
     String email, welcomeMessage;
+    ListView listView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -42,6 +44,10 @@ public class MainPage extends Activity {
 
         TextView textView = (TextView) findViewById(R.id.welcomeMessage);
         textView.setText(welcomeMessage);
+
+        //Handle the listview
+        listView = (ListView) findViewById(R.id.listView);
+        
 
     }
 
