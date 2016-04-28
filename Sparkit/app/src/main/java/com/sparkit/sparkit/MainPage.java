@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -58,6 +59,17 @@ public class MainPage extends Activity {
                                             android.R.layout.simple_list_item_1, addressList );
 
         listView.setAdapter(arrayAdapter);
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+            public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
+                String address = addressList.get(position);
+                Intent intent = new Intent(MainPage.this, EditReservation.class);
+                intent.putExtra("address", address);
+                intent.putExtra("welcomeMessage", welcomeMessage);
+                intent.putExtra("email",email);
+                startActivity(intent);
+            }
+        });
 
     }
 
