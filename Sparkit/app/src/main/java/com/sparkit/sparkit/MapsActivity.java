@@ -195,10 +195,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     }
 
     public void backToMain(View view){
-        Intent intent = new Intent(this, MainPage.class);
+        finish();
+
+        /*Intent intent = new Intent(this, MainPage.class);
         intent.putExtra("welcomeMessage", welcomeMessage);
         intent.putExtra("email",email);
-        startActivity(intent);
+        startActivity(intent);*/
     }
 
 

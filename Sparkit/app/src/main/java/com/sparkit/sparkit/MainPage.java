@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -17,11 +18,13 @@ import java.util.ArrayList;
 public class MainPage extends Activity {
 
     String email, welcomeMessage;
+    ArrayList<String> addressList = new ArrayList<String>();
     ListView listView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.main_page);
 
         if(savedInstanceState == null) {
@@ -29,9 +32,11 @@ public class MainPage extends Activity {
             if (extras == null) {
                 email = null;
                 welcomeMessage = null;
+                addressList = null;
             } else {
                 email = extras.getString("email");
                 welcomeMessage = extras.getString("welcomeMessage");
+                addressList = getIntent().getStringArrayListExtra("addressList");
             }
         }
         else{
@@ -40,6 +45,7 @@ public class MainPage extends Activity {
             email = (String)savedInstanceState.getSerializable("email");
             //welcomeMessage = extras.getString("welcomeMessage");
             welcomeMessage = (String)savedInstanceState.getSerializable("welcomeMessage");
+            addressList = getIntent().getStringArrayListExtra("addressList");
         }
 
         TextView textView = (TextView) findViewById(R.id.welcomeMessage);
@@ -47,12 +53,17 @@ public class MainPage extends Activity {
 
         //Handle the listview
         listView = (ListView) findViewById(R.id.listView);
-        
+
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this,
+                                            android.R.layout.simple_list_item_1, addressList );
+
+        listView.setAdapter(arrayAdapter);
 
     }
 
     public void onLogout(View view){
         startActivity(new Intent(MainPage.this, LoginActivity.class));
+        finish();
     }
 
     public void onPost(View view){
@@ -77,7 +88,6 @@ public class MainPage extends Activity {
     }
 
     public void goToSearch(ArrayList<String> result){
-        finish();
         Intent intent = new Intent(MainPage.this, MapsActivity.class);
         intent.putExtra("addressList", result);
         intent.putExtra("email", email);

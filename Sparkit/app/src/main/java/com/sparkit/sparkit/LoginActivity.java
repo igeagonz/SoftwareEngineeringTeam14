@@ -17,7 +17,7 @@ import android.widget.Toast;
 public class LoginActivity extends Activity {
 
     EditText ET_email, ET_password;
-    String email, password;
+    String email, password, welcomeMessage;
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
@@ -28,7 +28,6 @@ public class LoginActivity extends Activity {
     }
 
     public void userSignup(View view){
-
         startActivity(new Intent(LoginActivity.this, SignupActivity.class));
     }
 
@@ -74,20 +73,30 @@ public class LoginActivity extends Activity {
         return matcher.matches();
     }
 
-    public void goToMain(String result){
+    public void populateList(String result){
 
-        Intent intent = new Intent(this, MainPage.class);
-        intent.putExtra("email", email);
-        intent.putExtra("welcomeMessage", result);
-        startActivity(intent);
-        finish();
+        welcomeMessage = result;
+
+        BackgroundTaskListView backgroundTaskListView = new BackgroundTaskListView(this);
+        backgroundTaskListView.execute(this);
 
     }
 
     public void restartLogin() {
+        recreate();
+        //finish();
+        //startActivity(new Intent(this, LoginActivity.class));
+    }
 
+    public void goToMain(ArrayList<String> result) {
+
+        Intent intent = new Intent(this, MainPage.class);
+        intent.putExtra("email", email);
+        intent.putExtra("welcomeMessage", welcomeMessage);
+        intent.putExtra("addressList", result);
+        startActivity(intent);
         finish();
-        startActivity(new Intent(this, LoginActivity.class));
+
     }
 }
 

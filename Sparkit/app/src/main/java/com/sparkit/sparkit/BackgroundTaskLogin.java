@@ -96,7 +96,7 @@ public class BackgroundTaskLogin extends AsyncTask<LoginActivity, Void, String> 
         toast.show();
 
         if(!result.equals("Incorrect username and password... Try again")){
-            loginActivity.goToMain(result);
+            loginActivity.populateList(result);
         }
         else{
             loginActivity.restartLogin();
