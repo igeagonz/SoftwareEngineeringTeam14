@@ -65,4 +65,8 @@ public class EditReservation extends Activity {
         startActivity(intent);
         finish();
     }
+
+    public void goHome(View view){
+        finish();
+    }
 }

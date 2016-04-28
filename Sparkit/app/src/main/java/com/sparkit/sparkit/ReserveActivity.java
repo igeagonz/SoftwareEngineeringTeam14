@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.*;
 import android.widget.*;
 
+import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -100,7 +101,7 @@ public class ReserveActivity extends Activity{
         BackgroundTaskReserve backgroundTaskReserve = new BackgroundTaskReserve(this);
         backgroundTaskReserve.execute(this);
 
-        finish();
+        //finish();
 
     }
 
@@ -111,5 +112,18 @@ public class ReserveActivity extends Activity{
         startActivity(intent);
     }
 
+    public void updateList() {
+        BackgroundTaskListUpdate backgroundTaskListUpdate = new BackgroundTaskListUpdate(this);
+        backgroundTaskListUpdate.execute(this);
+    }
+
+    public void goToMain(ArrayList<String> result) {
+        Intent intent = new Intent(this, MainPage.class);
+        intent.putExtra("email", email);
+        intent.putExtra("welcomeMessage", welcomeMessage);
+        intent.putExtra("addressList",result);
+        startActivity(intent);
+        finish();
+    }
 }
 

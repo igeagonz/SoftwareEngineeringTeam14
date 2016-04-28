@@ -66,12 +66,7 @@ public class CreatePosting extends Activity
     }
 
     public void goHome(View view){
-
-        Intent intent = new Intent(this, MainPage.class);
-        intent.putExtra("email", email);
-        intent.putExtra("welcomeMessage", welcomeMessage);
-        startActivity(intent);
-
+        finish();
     }
 
 }

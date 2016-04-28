@@ -94,6 +94,7 @@ public class BackgroundTaskReserve extends AsyncTask<ReserveActivity, Void, Stri
     protected void onPostExecute(String result){
         Toast toast = Toast.makeText(ctx, result, Toast.LENGTH_SHORT);
         toast.show();
+        reserveActivity.updateList();
 
 
     }

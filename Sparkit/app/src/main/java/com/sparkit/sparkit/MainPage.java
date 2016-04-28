@@ -63,11 +63,15 @@ public class MainPage extends Activity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
             public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
                 String address = addressList.get(position);
-                Intent intent = new Intent(MainPage.this, EditReservation.class);
-                intent.putExtra("address", address);
-                intent.putExtra("welcomeMessage", welcomeMessage);
-                intent.putExtra("email",email);
-                startActivity(intent);
+
+                if (!address.equals("No reservations at this time...")){
+                    Intent intent = new Intent(MainPage.this, EditReservation.class);
+                    intent.putExtra("address", address);
+                    intent.putExtra("welcomeMessage", welcomeMessage);
+                    intent.putExtra("email",email);
+                    startActivity(intent);
+                }
+
             }
         });
 
