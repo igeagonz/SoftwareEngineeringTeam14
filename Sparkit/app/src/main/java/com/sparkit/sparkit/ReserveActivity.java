@@ -1,13 +1,15 @@
 package com.sparkit.sparkit;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import android.app.*;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.*;
 import android.widget.*;
 
 import java.util.ArrayList;
+import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -17,10 +19,10 @@ import java.util.regex.Pattern;
  */
 public class ReserveActivity extends Activity{
 
-    private EditText ET_email;
     public String email, welcomeMessage, address, length;
     private Spinner reservation_length;
-
+    private EditText date_select;
+    Calendar myCalendar = Calendar.getInstance();
 
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
@@ -54,10 +56,6 @@ public class ReserveActivity extends Activity{
         TextView textView = (TextView)findViewById(R.id.address);
         textView.setText(address);
 
-        ET_email = (EditText) findViewById(R.id.emailReservation);
-        ET_email.setText(email);
-
-
         reservation_length = (Spinner) findViewById(R.id.spinner1);
 
         String[] item = new String[]{"Day", "Week", "Month", "Semester"};
@@ -84,35 +82,79 @@ public class ReserveActivity extends Activity{
                         // Whatever you want to happen when the fourth item gets selected
                         length = "Semester";
                         break;
-
                 }
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
+            }
+        });
 
+
+        date_select = (EditText)findViewById(R.id.date_select);
+
+        final DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
+
+            @Override
+            public void onDateSet(DatePicker view, int year, int monthOfYear,
+                                  int dayOfMonth) {
+                // TODO Auto-generated method stub
+                myCalendar.set(Calendar.YEAR, year);
+                myCalendar.set(Calendar.MONTH, monthOfYear);
+                myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+                updateLabel();
+            }
+
+        };
+
+        date_select.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                // TODO Auto-generated method stub
+                new DatePickerDialog(ReserveActivity.this, date, myCalendar
+                        .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
+                        myCalendar.get(Calendar.DAY_OF_MONTH)).show();
             }
         });
 
     }
 
+    private void updateLabel() {
+
+        String myFormat = "MM/dd/yy"; //In which you need put here
+        SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
+
+        date_select.setText(sdf.format(myCalendar.getTime()));
+    }
+
+
     public void onReserve(View view){
 
-        BackgroundTaskReserve backgroundTaskReserve = new BackgroundTaskReserve(this);
+        String reserve_date = date_select.toString();
+
+        Intent intent = new Intent(this,TransactionActivity.class);
+        intent.putExtra("email", email);
+        intent.putExtra("welcomeMessage", welcomeMessage);
+        intent.putExtra("length", length);
+        intent.putExtra("reserve_address",address);
+        intent.putExtra("reserve_date",reserve_date);
+
+        startActivity(intent);
+
+
+        /*BackgroundTaskReserve backgroundTaskReserve = new BackgroundTaskReserve(this);
         backgroundTaskReserve.execute(this);
 
-        //finish();
+        //finish();*/
 
     }
 
     public void goHome(View view){
-        Intent intent = new Intent(this, MainPage.class);
-        intent.putExtra("email", email);
-        intent.putExtra("welcomeMessage", welcomeMessage);
-        startActivity(intent);
+        finish();
     }
 
-    public void updateList() {
+    /*public void updateList() {
         BackgroundTaskListUpdate backgroundTaskListUpdate = new BackgroundTaskListUpdate(this);
         backgroundTaskListUpdate.execute(this);
     }
@@ -125,5 +167,6 @@ public class ReserveActivity extends Activity{
         startActivity(intent);
         finish();
     }
+    */
 }
 

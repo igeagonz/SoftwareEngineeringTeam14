@@ -18,6 +18,8 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
 
+import se.simbio.encryption.Encryption;
+
 
 /**
  * Created by nacho on 3/11/16.
@@ -44,6 +46,10 @@ public class BackgroundTask extends AsyncTask<String, Void, String> {
             String lname = params[2];
             String email = params[3];
             String password = params[4];
+
+            //Encrypt the password
+            Encryption encryption = Encryption.getDefault("Key", "Salt", new byte[16]);
+            String pass_encrypt = encryption.encryptOrNull(password);
 
             try {
                 URL url = new URL(reg_url);

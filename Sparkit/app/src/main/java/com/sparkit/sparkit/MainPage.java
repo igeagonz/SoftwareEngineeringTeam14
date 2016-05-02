@@ -70,6 +70,7 @@ public class MainPage extends Activity {
                     intent.putExtra("welcomeMessage", welcomeMessage);
                     intent.putExtra("email",email);
                     startActivity(intent);
+                    finish();
                 }
 
             }

@@ -20,11 +20,11 @@ import java.util.ArrayList;
 /**
  * Created by I-Gea on 4/28/2016.
  */
-public class BackgroundTaskListUpdate extends AsyncTask<ReserveActivity, Void, ArrayList<String>> {
+public class BackgroundTaskListUpdate extends AsyncTask<TransactionActivity, Void, ArrayList<String>> {
 
     Context ctx;
     AlertDialog alertDialog;
-    ReserveActivity reserveActivity;
+    TransactionActivity transactionActivity;
 
     BackgroundTaskListUpdate(Context ctx) {
         this.ctx = ctx;
@@ -32,11 +32,11 @@ public class BackgroundTaskListUpdate extends AsyncTask<ReserveActivity, Void, A
     }
 
     @Override
-    protected ArrayList<String> doInBackground(ReserveActivity... params) {
+    protected ArrayList<String> doInBackground(TransactionActivity... params) {
 
         String address_url = "http://130.184.99.197/GetReservations.php";
-        reserveActivity = params[0];
-        String email = reserveActivity.email;
+        transactionActivity = params[0];
+        String email = transactionActivity.email;
 
 
         try {
@@ -87,7 +87,7 @@ public class BackgroundTaskListUpdate extends AsyncTask<ReserveActivity, Void, A
     }
 
     protected void onPostExecute(ArrayList<String> result) {
-        reserveActivity.goToMain(result);
+        transactionActivity.goToMain(result);
     }
 }
 

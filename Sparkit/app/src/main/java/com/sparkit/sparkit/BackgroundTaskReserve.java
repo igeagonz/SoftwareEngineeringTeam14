@@ -22,24 +22,24 @@ import java.net.URLEncoder;
 /**
  * Created by nacho on 3/11/16.
  */
-public class BackgroundTaskReserve extends AsyncTask<ReserveActivity, Void, String> {
+public class BackgroundTaskReserve extends AsyncTask<TransactionActivity, Void, String> {
 
     Context ctx;
     AlertDialog alertDialog;
-    ReserveActivity reserveActivity;
+    TransactionActivity transactionActivity;
     BackgroundTaskReserve(Context ctx){
         this.ctx = ctx;
 
     }
 
     @Override
-    protected String doInBackground(ReserveActivity... params){
+    protected String doInBackground(TransactionActivity... params){
 
         String reserve_url = "http://130.184.99.197/reserve.php";
-        reserveActivity = params[0];
-        String email = reserveActivity.email;
-        String length = reserveActivity.length;
-        String address = reserveActivity.address;
+        transactionActivity = params[0];
+        String email = transactionActivity.email;
+        String length = transactionActivity.length;
+        String address = transactionActivity.reserve_address;
 
 
             try {
@@ -94,7 +94,7 @@ public class BackgroundTaskReserve extends AsyncTask<ReserveActivity, Void, Stri
     protected void onPostExecute(String result){
         Toast toast = Toast.makeText(ctx, result, Toast.LENGTH_SHORT);
         toast.show();
-        reserveActivity.updateList();
+        transactionActivity.updateList();
 
 
     }
