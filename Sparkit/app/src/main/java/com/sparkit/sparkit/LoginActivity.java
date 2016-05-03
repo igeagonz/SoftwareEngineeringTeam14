@@ -18,6 +18,8 @@ public class LoginActivity extends Activity {
 
     EditText ET_email, ET_password;
     String email, password, welcomeMessage;
+    ArrayList<String> reserve_results = new ArrayList<String>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
@@ -90,12 +92,22 @@ public class LoginActivity extends Activity {
 
     public void goToMain(ArrayList<String> result) {
 
+
         Intent intent = new Intent(this, MainPage.class);
         intent.putExtra("email", email);
         intent.putExtra("welcomeMessage", welcomeMessage);
-        intent.putExtra("addressList", result);
+        intent.putExtra("addressList", reserve_results);
+        intent.putExtra("postList", result);
         startActivity(intent);
         finish();
+
+    }
+
+    public void goToPostUpdate(ArrayList<String> result) {
+        reserve_results = result;
+
+        BackgroundTaskPostListView backgroundTaskPostListView = new BackgroundTaskPostListView(this);
+        backgroundTaskPostListView.execute(this);
 
     }
 }

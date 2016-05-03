@@ -3,7 +3,6 @@ package com.sparkit.sparkit;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.os.AsyncTask;
-import android.widget.Toast;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -18,23 +17,26 @@ import java.net.URL;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 
-public class BackgroundTaskListView extends AsyncTask<LoginActivity, Void, ArrayList<String>> {
+/**
+ * Created by I-Gea on 4/27/2016.
+ */
+public class BackgroundTaskListRemove extends AsyncTask<EditPost, Void, ArrayList<String>> {
 
     Context ctx;
     AlertDialog alertDialog;
-    LoginActivity loginActivity;
+    EditPost editPost;
 
-    BackgroundTaskListView(Context ctx) {
+    BackgroundTaskListRemove(Context ctx) {
         this.ctx = ctx;
 
     }
 
     @Override
-    protected ArrayList<String> doInBackground(LoginActivity... params) {
+    protected ArrayList<String> doInBackground(EditPost... params) {
 
-        String address_url = "http://130.184.99.197/GetReservations.php";
-        loginActivity = params[0];
-        String email = loginActivity.email;
+        String address_url = "http://130.184.99.197/GetPosts.php";
+        editPost = params[0];
+        String email = editPost.email;
 
 
         try {
@@ -85,8 +87,8 @@ public class BackgroundTaskListView extends AsyncTask<LoginActivity, Void, Array
     }
 
     protected void onPostExecute(ArrayList<String> result) {
-        //loginActivity.goToMain(result);
-
-        loginActivity.goToPostUpdate(result);
+        editPost.goToMain(result);
     }
 }
+
+

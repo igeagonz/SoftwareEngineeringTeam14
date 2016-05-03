@@ -40,6 +40,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         GoogleMap.OnMyLocationButtonClickListener, GoogleMap.OnInfoWindowClickListener {
 
     ArrayList<String> addresses = new ArrayList<String>();
+    ArrayList<String> postList = new ArrayList<String>();
     String email, welcomeMessage;
 
     private GoogleMap mMap;
@@ -60,6 +61,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         //retrieve arraylist of addresses
         addresses = getIntent().getStringArrayListExtra("addressList");
+
+        postList = getIntent().getStringArrayListExtra("postList");
+
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
@@ -124,6 +128,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         intent.putExtra("reserve_address", marker.getTitle());
         intent.putExtra("email", email);
         intent.putExtra("welcomeMessage", welcomeMessage);
+        intent.putExtra("postList", postList);
         startActivity(intent);
 
     }

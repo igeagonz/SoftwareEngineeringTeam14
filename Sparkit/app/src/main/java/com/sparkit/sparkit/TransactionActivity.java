@@ -22,6 +22,8 @@ public class TransactionActivity extends Activity {
     public String card_number, month, year, cvc, billing_address, city, state, zip;
     public String email, welcomeMessage, reserve_address, length;
     public Spinner states;
+    ArrayList<String> postList = new ArrayList<String>();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -49,6 +51,7 @@ public class TransactionActivity extends Activity {
             length = (String)savedInstanceState.getSerializable("length");
         }
 
+        postList = getIntent().getStringArrayListExtra("postList");
 
         states = (Spinner) findViewById(R.id.statesSpinner);
         // Create an ArrayAdapter using the string array and a default spinner layout
@@ -99,6 +102,7 @@ public class TransactionActivity extends Activity {
         intent.putExtra("email", email);
         intent.putExtra("welcomeMessage", welcomeMessage);
         intent.putExtra("addressList",result);
+        intent.putExtra("postList", postList);
         startActivity(intent);
         finish();
     }

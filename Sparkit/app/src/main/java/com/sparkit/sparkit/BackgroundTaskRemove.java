@@ -16,36 +16,39 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
-import java.util.ArrayList;
 
-public class BackgroundTaskListView extends AsyncTask<LoginActivity, Void, ArrayList<String>> {
+/**
+ * Created by I-Gea on 4/27/2016.
+ */
+public class BackgroundTaskRemove extends AsyncTask<EditPost, Void, String> {
 
     Context ctx;
     AlertDialog alertDialog;
-    LoginActivity loginActivity;
+    EditPost editPost;
 
-    BackgroundTaskListView(Context ctx) {
+    BackgroundTaskRemove(Context ctx) {
         this.ctx = ctx;
 
     }
 
     @Override
-    protected ArrayList<String> doInBackground(LoginActivity... params) {
+    protected String doInBackground(EditPost... params) {
 
-        String address_url = "http://130.184.99.197/GetReservations.php";
-        loginActivity = params[0];
-        String email = loginActivity.email;
-
+        String delete_url = "http://130.184.99.197/DeletePost.php";
+        editPost = params[0];
+        String email = editPost.email;
+        String address = editPost.address;
 
         try {
-            URL url = new URL(address_url);
+            URL url = new URL(delete_url);
             HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
             httpURLConnection.setRequestMethod("POST");
             httpURLConnection.setDoOutput(true);
             OutputStream OS = httpURLConnection.getOutputStream();
-            BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(OS,"UTF-8"));
+            BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(OS, "UTF-8"));
 
-            String data = URLEncoder.encode("email", "UTF-8") + "=" + URLEncoder.encode(email, "UTF-8");
+            String data = URLEncoder.encode("email", "UTF-8") + "=" + URLEncoder.encode(email, "UTF-8") + "&" +
+                    URLEncoder.encode("address", "UTF-8") + "=" + URLEncoder.encode(address, "UTF-8");
             bufferedWriter.write(data);
             bufferedWriter.flush();
             bufferedWriter.close();
@@ -53,11 +56,11 @@ public class BackgroundTaskListView extends AsyncTask<LoginActivity, Void, Array
 
             InputStream IS = httpURLConnection.getInputStream();
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(IS, "iso-8859-1"));
-            ArrayList<String> result = new ArrayList<String>();
+            String result = "";
             String line = "";
 
             while ((line = bufferedReader.readLine()) != null) {
-                result.add(line);
+                result += line;
             }
 
             bufferedReader.close();
@@ -82,11 +85,15 @@ public class BackgroundTaskListView extends AsyncTask<LoginActivity, Void, Array
     }
 
     protected void onPreExecute() {
+        alertDialog = new AlertDialog.Builder(ctx).create();
+        alertDialog.setTitle("Login Status");
     }
 
-    protected void onPostExecute(ArrayList<String> result) {
-        //loginActivity.goToMain(result);
-
-        loginActivity.goToPostUpdate(result);
+    protected void onPostExecute(String result) {
+        Toast toast = Toast.makeText(ctx, result, Toast.LENGTH_SHORT);
+        toast.show();
+        editPost.retrieveList();
     }
 }
+
+

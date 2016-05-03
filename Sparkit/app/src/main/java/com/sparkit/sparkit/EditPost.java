@@ -11,15 +11,16 @@ import java.util.ArrayList;
 /**
  * Created by I-Gea on 4/27/2016.
  */
-public class EditReservation extends Activity {
+public class EditPost extends Activity {
     String address, email, welcomeMessage;
-    ArrayList<String> postList = new ArrayList<String>();
+    ArrayList<String> addressList = new ArrayList<String>();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.activity_editreservation);
+        setContentView(R.layout.activity_editpost);
 
         if(savedInstanceState == null) {
             Bundle extras = getIntent().getExtras();
@@ -44,25 +45,22 @@ public class EditReservation extends Activity {
 
     }
 
-    public void onCancel(View view){
-        BackgroundTaskCancel backgroundTaskCancel = new BackgroundTaskCancel(this);
-        backgroundTaskCancel.execute(this);
-
+    public void onRemove(View view){
+        BackgroundTaskRemove backgroundTaskRemove = new BackgroundTaskRemove(this);
+        backgroundTaskRemove.execute(this);
 
     }
 
     public void retrieveList(){
-
-        BackgroundTaskPostListView2 backgroundTaskPostListView2 = new BackgroundTaskPostListView2(this);
-        backgroundTaskPostListView2.execute(this);
+        BackgroundTaskListView2 backgroundTaskListView2 = new BackgroundTaskListView2(this);
+        backgroundTaskListView2.execute(this);
     }
 
     public void retrieveList2(ArrayList<String> result){
+        addressList = result;
 
-        postList = result;
-
-        BackgroundTaskListCancel backgroundTaskListCancel = new BackgroundTaskListCancel(this);
-        backgroundTaskListCancel.execute(this);
+        BackgroundTaskListRemove backgroundTaskListRemove = new BackgroundTaskListRemove(this);
+        backgroundTaskListRemove.execute(this);
     }
 
     public void goToMain(ArrayList<String> result) {
@@ -70,8 +68,8 @@ public class EditReservation extends Activity {
         Intent intent = new Intent(this, MainPage.class);
         intent.putExtra("email", email);
         intent.putExtra("welcomeMessage", welcomeMessage);
-        intent.putExtra("addressList",result);
-        intent.putExtra("postList", postList);
+        intent.putExtra("postList",result);
+        intent.putExtra("addressList",addressList);
         startActivity(intent);
         finish();
     }

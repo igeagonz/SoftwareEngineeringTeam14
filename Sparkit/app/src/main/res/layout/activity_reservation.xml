@@ -7,9 +7,9 @@
     <Button
         android:layout_width="71dp"
         android:layout_height="wrap_content"
-        android:text="Home"
+        android:text="Back"
         android:id="@+id/homeButton"
-        android:onClick="goHome"/>
+        android:onClick="goBack"/>
 
     <TextView
         android:layout_width="175dp"

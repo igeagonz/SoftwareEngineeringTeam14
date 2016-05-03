@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.view.*;
 import android.widget.*;
 
+import java.util.ArrayList;
+
 /**
  * Created by grantjohns on 4/1/16.
  */
@@ -14,6 +16,8 @@ public class CreatePosting extends Activity
 {
     EditText ET_title, ET_email, ET_stAddress, ET_city, ET_state, ET_zip, ET_description;
     String title, email,stAddress, city, state, zip, description, welcomeMessage;
+    ArrayList<String> addressList = new ArrayList<String>();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -59,14 +63,35 @@ public class CreatePosting extends Activity
 
         String method = "post";
 
-        BackgroundTask backgroundTask = new BackgroundTask(this);
-        backgroundTask.execute(method, title, email, stAddress, city, state, zip, description);
+        BackgroundTaskPost backgroundTaskPost = new BackgroundTaskPost(this);
+        backgroundTaskPost.execute(this);
 
-        finish();
+        //finish();
     }
-
     public void goHome(View view){
         finish();
     }
 
+    public void goToMain(ArrayList<String> result) {
+
+        Intent intent = new Intent(this, MainPage.class);
+        intent.putExtra("email", email);
+        intent.putExtra("welcomeMessage", welcomeMessage);
+        intent.putExtra("postList",result);
+        intent.putExtra("addressList",addressList);
+        startActivity(intent);
+        finish();
+    }
+
+    public void retrieveList() {
+        BackgroundTaskListView3 backgroundTaskListView3 = new BackgroundTaskListView3(this);
+        backgroundTaskListView3.execute(this);
+    }
+
+    public void retrieveList2(ArrayList<String> result) {
+        addressList = result;
+        BackgroundTaskPostListView3 backgroundTaskPostListView3 = new BackgroundTaskPostListView3(this);
+        backgroundTaskPostListView3.execute(this);
+
+    }
 }

@@ -18,13 +18,13 @@ import java.net.URL;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 
-public class BackgroundTaskListView extends AsyncTask<LoginActivity, Void, ArrayList<String>> {
+public class BackgroundTaskPostListView extends AsyncTask<LoginActivity, Void, ArrayList<String>> {
 
     Context ctx;
     AlertDialog alertDialog;
     LoginActivity loginActivity;
 
-    BackgroundTaskListView(Context ctx) {
+    BackgroundTaskPostListView(Context ctx) {
         this.ctx = ctx;
 
     }
@@ -32,7 +32,7 @@ public class BackgroundTaskListView extends AsyncTask<LoginActivity, Void, Array
     @Override
     protected ArrayList<String> doInBackground(LoginActivity... params) {
 
-        String address_url = "http://130.184.99.197/GetReservations.php";
+        String address_url = "http://130.184.99.197/GetPosts.php";
         loginActivity = params[0];
         String email = loginActivity.email;
 
@@ -85,8 +85,8 @@ public class BackgroundTaskListView extends AsyncTask<LoginActivity, Void, Array
     }
 
     protected void onPostExecute(ArrayList<String> result) {
-        //loginActivity.goToMain(result);
+        loginActivity.goToMain(result);
 
-        loginActivity.goToPostUpdate(result);
+
     }
 }

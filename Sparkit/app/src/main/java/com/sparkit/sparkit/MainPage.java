@@ -20,7 +20,9 @@ public class MainPage extends Activity {
 
     String email, welcomeMessage;
     ArrayList<String> addressList = new ArrayList<String>();
+    ArrayList<String> postList = new ArrayList<String>();
     ListView listView;
+    ListView postView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -34,10 +36,12 @@ public class MainPage extends Activity {
                 email = null;
                 welcomeMessage = null;
                 addressList = null;
+                postList = null;
             } else {
                 email = extras.getString("email");
                 welcomeMessage = extras.getString("welcomeMessage");
                 addressList = getIntent().getStringArrayListExtra("addressList");
+                postList = getIntent().getStringArrayListExtra("postList");
             }
         }
         else{
@@ -47,6 +51,7 @@ public class MainPage extends Activity {
             //welcomeMessage = extras.getString("welcomeMessage");
             welcomeMessage = (String)savedInstanceState.getSerializable("welcomeMessage");
             addressList = getIntent().getStringArrayListExtra("addressList");
+            postList = getIntent().getStringArrayListExtra("postList");
         }
 
         TextView textView = (TextView) findViewById(R.id.welcomeMessage);
@@ -54,6 +59,7 @@ public class MainPage extends Activity {
 
         //Handle the listview
         listView = (ListView) findViewById(R.id.listView);
+        postView = (ListView) findViewById(R.id.postView);
 
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this,
                                             android.R.layout.simple_list_item_1, addressList );
@@ -70,7 +76,27 @@ public class MainPage extends Activity {
                     intent.putExtra("welcomeMessage", welcomeMessage);
                     intent.putExtra("email",email);
                     startActivity(intent);
-                    finish();
+                    //finish();
+                }
+
+            }
+        });
+
+        ArrayAdapter<String> arrayAdapter2 = new ArrayAdapter<String>(this,
+                android.R.layout.simple_list_item_1, postList );
+
+        postView.setAdapter(arrayAdapter2);
+
+        postView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+            public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
+                String address = postList.get(position);
+
+                if (!address.equals("No postings at this time...")){
+                    Intent intent = new Intent(MainPage.this, EditPost.class);
+                    intent.putExtra("address", address);
+                    intent.putExtra("welcomeMessage", welcomeMessage);
+                    intent.putExtra("email",email);
+                    startActivity(intent);
                 }
 
             }
@@ -107,6 +133,7 @@ public class MainPage extends Activity {
     public void goToSearch(ArrayList<String> result){
         Intent intent = new Intent(MainPage.this, MapsActivity.class);
         intent.putExtra("addressList", result);
+        intent.putExtra("postList",postList);
         intent.putExtra("email", email);
         intent.putExtra("welcomeMessage", welcomeMessage);
         startActivity(intent);

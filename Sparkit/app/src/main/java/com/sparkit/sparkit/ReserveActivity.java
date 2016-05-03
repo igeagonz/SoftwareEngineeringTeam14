@@ -23,6 +23,7 @@ public class ReserveActivity extends Activity{
     private Spinner reservation_length;
     private EditText date_select;
     Calendar myCalendar = Calendar.getInstance();
+    ArrayList<String> postList = new ArrayList<String>();
 
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
@@ -52,6 +53,8 @@ public class ReserveActivity extends Activity{
             welcomeMessage = (String) savedInstanceState.getSerializable("welcomeMessage");
             address = (String)savedInstanceState.getSerializable("reserve_address");
         }
+
+        postList = getIntent().getStringArrayListExtra("postList");
 
         TextView textView = (TextView)findViewById(R.id.address);
         textView.setText(address);
@@ -138,6 +141,7 @@ public class ReserveActivity extends Activity{
         intent.putExtra("welcomeMessage", welcomeMessage);
         intent.putExtra("length", length);
         intent.putExtra("reserve_address",address);
+        intent.putExtra("postList",postList);
         intent.putExtra("reserve_date",reserve_date);
 
         startActivity(intent);
@@ -150,7 +154,7 @@ public class ReserveActivity extends Activity{
 
     }
 
-    public void goHome(View view){
+    public void goBack(View view){
         finish();
     }
 
