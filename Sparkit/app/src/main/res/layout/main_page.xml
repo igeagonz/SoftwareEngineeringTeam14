@@ -10,7 +10,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="170dp"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:background="#ffffff">
     <Button
         android:layout_width="78dp"
         android:layout_height="40dp"
@@ -38,7 +39,7 @@
         android:layout_height="50dp"
         android:layout_marginBottom="5dp"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:gravity="left"
+        android:textAlignment="center"
         android:textSize="20sp"
         android:fontFamily="sans-serif-light"
         android:textStyle="italic"
@@ -48,30 +49,9 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="fill_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:background="#ffffff">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:orientation="horizontal"
-            android:layout_height="55dp">
-        <Button
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:text="@string/post_button"
-            android:id="@+id/post_button"
-            android:layout_gravity="center_horizontal"
-            android:layout_weight="0.07"
-            android:onClick="onPost" />
-
-        <Button
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:text="@string/search_button"
-            android:id="@+id/search_button"
-            android:layout_gravity="center_horizontal"
-            android:onClick="onSearch"
-            android:layout_weight="0.07" />
-        </LinearLayout>
 
         <TextView
             android:layout_width="fill_parent"
@@ -101,9 +81,36 @@
             android:id="@+id/PostList" />
         <ListView
             android:layout_width="match_parent"
-            android:layout_height="fill_parent"
+            android:layout_height="100dp"
             android:id="@+id/postView"
             android:layout_gravity="center_vertical" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:layout_height="fill_parent"
+            android:layout_gravity="bottom"
+            android:paddingBottom="15dp">
+            <Button
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:text="@string/post_button"
+                android:id="@+id/post_button"
+                android:layout_gravity="bottom"
+                android:layout_weight="0.07"
+                android:onClick="onPost" />
+
+            <Button
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:text="@string/search_button"
+                android:id="@+id/search_button"
+                android:layout_gravity="bottom"
+                android:onClick="onSearch"
+                android:layout_weight="0.07" />
+        </LinearLayout>
     </LinearLayout>
+
+
 
 </LinearLayout>
