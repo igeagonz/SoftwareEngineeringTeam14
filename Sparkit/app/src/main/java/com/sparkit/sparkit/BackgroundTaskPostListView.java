@@ -16,6 +16,10 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.ArrayList;
 
 public class BackgroundTaskPostListView extends AsyncTask<LoginActivity, Void, ArrayList<String>> {
@@ -32,7 +36,31 @@ public class BackgroundTaskPostListView extends AsyncTask<LoginActivity, Void, A
     @Override
     protected ArrayList<String> doInBackground(LoginActivity... params) {
 
-        String address_url = "http://130.184.99.197/GetPosts.php";
+        loginActivity = params[0];
+        String email = loginActivity.email;
+
+        try {
+            Class.forName("com.mysql.jdbc.Driver").newInstance();
+            Connection con = DriverManager.getConnection("jdbc:mysql://192.168.1.147:3306/sparkit", "root", "password");
+            Statement stmt = con.createStatement();
+
+            ResultSet rs = stmt.executeQuery("select title from Posts where email = " + "'" + email + "'");
+
+            ArrayList<String> result = new ArrayList<>();
+
+            while(rs.next()) {
+                result.add(rs.getString(1));
+            }
+
+            con.close();
+
+            return result;
+
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
+
+        /*String address_url = "http://130.184.99.197/GetPosts.php";
         loginActivity = params[0];
         String email = loginActivity.email;
 
@@ -71,7 +99,7 @@ public class BackgroundTaskPostListView extends AsyncTask<LoginActivity, Void, A
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
-        }
+        }*/
 
         return null;
     }

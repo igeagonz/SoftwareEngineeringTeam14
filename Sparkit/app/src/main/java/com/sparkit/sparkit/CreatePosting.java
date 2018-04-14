@@ -8,10 +8,6 @@ import android.widget.*;
 
 import java.util.ArrayList;
 
-/**
- * Created by grantjohns on 4/1/16.
- */
-
 public class CreatePosting extends Activity
 {
     EditText ET_title, ET_email, ET_stAddress, ET_city, ET_state, ET_zip, ET_description;

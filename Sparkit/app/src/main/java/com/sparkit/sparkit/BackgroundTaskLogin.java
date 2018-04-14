@@ -17,6 +17,11 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 
 
@@ -35,8 +40,36 @@ public class BackgroundTaskLogin extends AsyncTask<LoginActivity, Void, String> 
 
     @Override
     protected String doInBackground(LoginActivity... params){
+        loginActivity = params[0];
+        String email = loginActivity.email;
+        String password = loginActivity.password;
+        String result = "";
 
-        String login_url = "http://130.184.99.197/login.php";
+        try {
+            Class.forName("com.mysql.jdbc.Driver").newInstance();
+            Connection con = DriverManager.getConnection("jdbc:mysql://192.168.1.147:3306/sparkit", "root", "password");
+            Statement stmt = con.createStatement();
+
+            ResultSet rs = stmt.executeQuery("select first_name from users where email=" + "'" +
+                    email + "'" + "and password=" + "'" + password +  "'");
+
+            while(rs.next()) {
+                result = rs.getString(1);
+            }
+
+            con.close();
+
+            return result;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
+
+
+
+        /*String login_url = "http://130.184.99.197/login.php";
         loginActivity = params[0];
         String email = loginActivity.email;
         String password = loginActivity.password;
@@ -78,8 +111,9 @@ public class BackgroundTaskLogin extends AsyncTask<LoginActivity, Void, String> 
                 e.printStackTrace();
             }
 
+        return null;*/
         return null;
-        }
+    }
 
 
     protected void onProgressUpdate(Void... values){

@@ -17,6 +17,11 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 
 import se.simbio.encryption.Encryption;
 
@@ -36,9 +41,9 @@ public class BackgroundTask extends AsyncTask<String, Void, String> {
     @Override
     protected String doInBackground(String... params){
 
-        String reg_url = "http://130.184.99.197/register.php";
+        /*String reg_url = "http://130.184.99.197/register.php";
         String login_url = "http://130.184.99.197/login.php";
-        String post_url = "http://130.184.99.197/post.php";
+        String post_url = "http://130.184.99.197/post.php";*/
         String method  = params[0];
 
         if(method.equals("register")){
@@ -52,6 +57,21 @@ public class BackgroundTask extends AsyncTask<String, Void, String> {
             String pass_encrypt = encryption.encryptOrNull(password);
 
             try {
+                Class.forName("com.mysql.jdbc.Driver").newInstance();
+                Connection con = DriverManager.getConnection("jdbc:mysql://192.168.1.147:3306/sparkit", "root", "password");
+
+                Statement stmt = con.createStatement();
+
+                int userId = stmt.executeUpdate("insert into users(Email, Password, first_name, last_name) " +
+                        "values("+ "'" + email + "'" + ", " + "'" + password + "'" + ", " + "'" + fname + "'" + ", " + "'" + lname + "'"
+                        + ")");
+
+                con.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            /*try {
                 URL url = new URL(reg_url);
                 HttpURLConnection httpURLConnection = (HttpURLConnection)url.openConnection();
                 httpURLConnection.setRequestMethod("POST");
@@ -88,9 +108,9 @@ public class BackgroundTask extends AsyncTask<String, Void, String> {
                 e.printStackTrace();
             } catch (IOException e){
                 e.printStackTrace();
-            }
+            }*/
         }
-        else if(method.equals("login")){
+        /*else if(method.equals("login")){
             String email = params[1];
             String password = params[2];
 
@@ -183,11 +203,11 @@ public class BackgroundTask extends AsyncTask<String, Void, String> {
             } catch (IOException e){
                 e.printStackTrace();
             }
-        }
+        }*/
 
         return null;
     }
-    //testout branching
+
 
     protected void onProgressUpdate(Void... values){
         super.onProgressUpdate(values);
